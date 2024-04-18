@@ -66,8 +66,14 @@ const AllProjectsPage = () => {
 
   return (
     <div className="container">
-      <h3 className="text-center key">All Projects</h3>
-      <div className="row mb-3 align-items-center">
+      <br />
+      <h2
+        className="card-title text-center mb-4"
+        style={{ color: "#406882", fontWeight: "2400" }}
+      >
+        All Projects
+      </h2>
+      <div className="row mb-3 justify-content-between align-items-center">
         <div className="col-md-6">
           <div className="input-group">
             <input
@@ -76,9 +82,14 @@ const AllProjectsPage = () => {
               placeholder="Search for project"
               value={searchTerm}
               onChange={handleSearchChange}
+              style={{ borderColor: "#1A374D" }}
             />
             <div className="input-group-append">
-              <span className="input-group-text" style={{ cursor: "pointer" }}>
+              <span
+                className="input-group-text"
+                style={{ cursor: "pointer" }}
+                onClick={handleSearchSubmit}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -89,6 +100,7 @@ const AllProjectsPage = () => {
                     width: "1.5rem",
                     height: "1.5rem",
                     stroke: "#6c757d",
+                    borderColor: "#1A374D",
                   }}
                 >
                   <path
@@ -109,8 +121,9 @@ const AllProjectsPage = () => {
               id="domainDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              style={{ background: "white", color: "#406882" }}
             >
-              Domain
+              {selectedDomain ? selectedDomain : "Domain"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="domainDropdown">
               <li>
@@ -149,8 +162,9 @@ const AllProjectsPage = () => {
               id="professorDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
+              style={{ background: "white", color: "#406882" }}
             >
-              Professor
+              {selectedProfessor ? selectedProfessor : "Professor"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="professorDropdown">
               <li>
@@ -164,17 +178,17 @@ const AllProjectsPage = () => {
               <li>
                 <button
                   className="dropdown-item"
-                  onClick={() => handleProfessorChange("Professor 1")}
+                  onClick={() => handleProfessorChange("Manoranjan Sinha")}
                 >
-                  Professor 1
+                  Manoranjan Sinha
                 </button>
               </li>
               <li>
                 <button
                   className="dropdown-item"
-                  onClick={() => handleProfessorChange("Professor 2")}
+                  onClick={() => handleProfessorChange(" Mira Mitra")}
                 >
-                  Professor 2
+                  Mira Mitra
                 </button>
               </li>
               {/* Add more options as needed */}
@@ -186,14 +200,7 @@ const AllProjectsPage = () => {
         {filteredProjects.length === 0
           ? noProjectsMessage
           : filteredProjects.map((project, idx) => (
-              <ProjectCard
-                key={idx}
-                id={project._id}
-                title={project.title}
-                domain={project.domain}
-                prof={project.prof}
-                desc={project.desc}
-              />
+              <ProjectCard project={project} flag={false} md={4} key={idx} />
             ))}
       </div>
     </div>

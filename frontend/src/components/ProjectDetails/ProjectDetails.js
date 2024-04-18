@@ -49,7 +49,7 @@ const ProjectDetails = () => {
     return <p>No project data available.</p>;
   }
 
-  const { title, desc, prof, domain, studentName, image } = projectData;
+  const { title, desc, prof, domain, student, image } = projectData;
 
   return (
     <div className="research-project">
@@ -71,7 +71,7 @@ const ProjectDetails = () => {
               <b style={{ color: "#406882" }}>Professor:</b> {prof}
             </p>
             <p style={{ color: "#1A374D" }}>
-              <b style={{ color: "#406882" }}>Author:</b> {studentName}
+              <b style={{ color: "#406882" }}>Author:</b> {student}
             </p>
           </div>
           {Resources && Resources.length > 0 && (
