@@ -1,15 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+const port = 5001;
 
 const AddProject = () => {
   const host = "http://localhost:5001";
   const [profval, setProfval] = useState("");
   const [domainval, setDomainval] = useState("");
+  const [profNames, setProfNames] = useState([]);
+
   const [project, setProject] = useState({
     title: "",
     desc: "",
     imageUrl: "",
     urls: [{ url: "", urlDesc: "" }],
   });
+
+  const getProfNames = async () => {
+    const url = `http://localhost:${port}/api/prof/getprofs`;
+    const result = await axios.get(url, {
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    setProfNames(result.data);
+    console.log(result.data);
+    // console.log(result.data.name);
+  };
+
+  useEffect(() => {
+    getProfNames();
+  },[]);
 
   const profs = [
     { label: "Professor 1", value: 1 },

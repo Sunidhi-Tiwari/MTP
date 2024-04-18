@@ -1,41 +1,74 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../images/aerospace.jpg";
+const port = 5001;
 
 const ProjectCard = (props) => {
   const navigate = useNavigate();
-  console.log(props.id);
+  const {project, updateProject, flag, md} = props;
+  const deleteProject = async (id) => {
+    const response = await fetch(
+      `http://localhost:${port}/api/projects/deleteproject/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    const json = await response.json();
+    console.log(json);
+    // const newNotes = notes.filter((note) => { return note._id !== id })
+    // setNotes(newNotes)
+  };
+  console.log(project._id);
   return (
-    <div className="col-md-4">
+    <div className={`col-md-${md}`}>
       <div className="card my-3 mx-2">
         <img src={img} className="card-img-top" alt="project"></img>
         <div className="card-body">
-          <h5 className="card-title">{props.title}</h5>
-          <p className="card-text">{props.desc}</p>
-          <p className="card-text">{props.domain}</p>
-          <div className="d-flex">
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate(`/projectdetails/${props.id}`)}
-            >
-              Read More
-            </button>
-            <button
-              className="btn btn-success"
-              onClick={() => handleApprove(props.id)}
-            >
-              Approve
-            </button>
+          <div className="d-flex align-items-center">
+            <h5 className="card-title">{project.title}</h5>
+            {flag ? (
+              <>
+                <i
+                  className="far fa-trash-alt mx-3"
+                  onClick={() => {
+                    deleteProject(project._id);
+                  }}
+                ></i>
+                <i
+                  className="far fa-edit"
+                  onClick={() => {
+                    updateProject(project);
+                  }}
+                ></i>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
+          <p className="card-text">{project.desc}</p>
+          <h7 className="card-text">
+            <small className="text-muted">{project.prof}</small>
+          </h7>
+          <br></br>
+          <h7 className="card-text">
+            <small className="text-muted">{project.domain}</small>
+          </h7>
+          <br></br>
+          <br></br>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate(`/projectdetails/${project._id}`)}
+          >
+            Read More
+          </button>
         </div>
       </div>
     </div>
   );
-
-  function handleApprove(id) {
-    // Handle approval logic
-    console.log(`Project with ID ${id} approved.`);
-  }
 };
 
 export default ProjectCard;

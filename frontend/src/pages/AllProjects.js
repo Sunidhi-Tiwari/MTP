@@ -148,13 +148,11 @@ const AllProjectsPage = () => {
       <div className="row">
         {filteredProjects.map((project, idx) => (
           <ProjectCard
-            key={idx}
-            id={project._id}
-            title={project.title}
-            domain={project.domain}
-            prof={project.prof}
-            desc={project.desc}
-          />
+          project = {project}
+          flag={false}
+          md = {4}
+          key={idx}
+        />
         ))}
       </div>
     </div>

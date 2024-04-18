@@ -8,12 +8,12 @@ import AboutUsSection from "../components/HomePages/AboutUs";
 
 const Home = () => {
   return (
-    <>
+    <div style={{ background: "rgb(22, 17, 17)"}}>
       <FirstPage />
       <KeyFeatures />
       <FAQs />
       <AboutUsSection />
-    </>
+    </div>
   );
 };
 
