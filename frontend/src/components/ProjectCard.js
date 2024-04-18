@@ -12,7 +12,7 @@ const ProjectCard = (props) => {
         <div className="card-body">
           <h5 className="card-title">{props.title}</h5>
           <p className="card-text">{props.desc}</p>
-          <p className="card-text">{props.domain}</p>
+
           <div className="d-flex">
             <button
               className="btn btn-primary"

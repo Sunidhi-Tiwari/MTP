@@ -31,12 +31,34 @@ const AllProjectsPage = () => {
   };
 
   const handleSearchSubmit = () => {
-    // Implement search functionality here
+    // Filter projects based on search term
+    const filteredProjects = allProjects.filter(
+      (project) =>
+        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.prof.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    // Update the state with the filtered projects
+    setAllProjects(filteredProjects);
   };
+
+  // Display a message when no projects are found
+  const noProjectsMessage = (
+    <div className="text-center mt-3">
+      <p>
+        Sorry, we don't have anything matching your search. Please try searching
+        for something else.
+      </p>
+    </div>
+  );
 
   const filteredProjects = allProjects.filter((project) => {
     return (
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        project.prof.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (selectedDomain === "" || project.domain === selectedDomain) &&
       (selectedProfessor === "" || project.prof === selectedProfessor)
     );
@@ -51,17 +73,32 @@ const AllProjectsPage = () => {
             <input
               type="text"
               className="form-control"
-              placeholder="Search by project title"
+              placeholder="Search for project"
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={handleSearchSubmit}
-            >
-              <i className="bi bi-search"></i>
-            </button>
+            <div className="input-group-append">
+              <span className="input-group-text" style={{ cursor: "pointer" }}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  style={{
+                    width: "1.5rem",
+                    height: "1.5rem",
+                    stroke: "#6c757d",
+                  }}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                  />
+                </svg>
+              </span>
+            </div>
           </div>
         </div>
         <div className="col-md-3">
@@ -146,16 +183,18 @@ const AllProjectsPage = () => {
         </div>
       </div>
       <div className="row">
-        {filteredProjects.map((project, idx) => (
-          <ProjectCard
-            key={idx}
-            id={project._id}
-            title={project.title}
-            domain={project.domain}
-            prof={project.prof}
-            desc={project.desc}
-          />
-        ))}
+        {filteredProjects.length === 0
+          ? noProjectsMessage
+          : filteredProjects.map((project, idx) => (
+              <ProjectCard
+                key={idx}
+                id={project._id}
+                title={project.title}
+                domain={project.domain}
+                prof={project.prof}
+                desc={project.desc}
+              />
+            ))}
       </div>
     </div>
   );
