@@ -5,7 +5,7 @@ import ProjectCard from "../ProjectCard";
 const port = 5001;
 
 const PendingRequests = () => {
-  const [projectIds, setProjectIds] = useState([]);
+  const [pendingProjects, setPendingProjects] = useState([]);
   let [flag, setFlag] = useState(true);
   const getProjects = async () => {
     const url = `http://localhost:${port}/api/users/pendingProjects`;
@@ -14,7 +14,7 @@ const PendingRequests = () => {
         "auth-token": localStorage.getItem("token"),
       },
     });
-    setProjectIds(result.data);
+    setPendingProjects(result.data);
     console.log(result.data);
   };
 
@@ -25,6 +25,23 @@ const PendingRequests = () => {
       getProjects();
     }
   }, []);
+
+  const deleteProject = async (id) => {
+    const response = await fetch(
+      `http://localhost:${port}/api/projects/deleteproject/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    const json = await response.json();
+    console.log(json);
+    const newProjects = pendingProjects.filter((project) => { return project._id !== id })
+    setPendingProjects(newProjects)
+  };
 
   // const context = useContext(projectContext);
   const ref = useRef(null)
@@ -48,7 +65,19 @@ const PendingRequests = () => {
     });
     const json = await response.json(); 
     console.log(json);
-      refClose.current.click();
+    refClose.current.click();
+
+    let newProjects = JSON.parse(JSON.stringify(pendingProjects))
+    // Logic to edit in client
+    for (let index = 0; index < newProjects.length; index++) {
+      const element = newProjects[index];
+      if (element._id === project.id) {
+        newProjects[index].title = project.title;
+        newProjects[index].desc = project.desc;
+        break; 
+      }
+    }  
+    setPendingProjects(newProjects);
       // props.showAlert("Updated successfully",'success')
   }
 
@@ -56,7 +85,7 @@ const PendingRequests = () => {
       setProject({...project, [e.target.name]: e.target.value})
   }
 
-  if(projectIds.length === 0) {
+  if(pendingProjects.length === 0) {
     return <div className="container">You don't have any pending projects</div>;
   }
   else{
@@ -97,12 +126,13 @@ const PendingRequests = () => {
           </div>
       </div>
       <div className="container row">
-        {projectIds &&
-          projectIds.map((project, idx) => {
+        {pendingProjects &&
+          pendingProjects.map((project, idx) => {
             return (
               <ProjectCard
                 project = {project}
                 updateProject={updateProject}
+                deleteProject={deleteProject}
                 flag = {true}
                 md = {6}
                 key={idx}
