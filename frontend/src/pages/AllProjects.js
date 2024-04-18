@@ -4,13 +4,19 @@ import ProjectCard from "../components/ProjectCard";
 const port = 5001;
 
 const AllProjectsPage = () => {
+  const [flag, setFlag] = useState(true);
   const [allProjects, setAllProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDomain, setSelectedDomain] = useState("");
-  const [selectedProfessor, setSelectedProfessor] = useState("");
-  const [profNames, setProfNames] = useState([]);
+  const [selectedDomain, setSelectedDomain] = useState("All Domains");
+  const [selectedProfessor, setSelectedProfessor] = useState("All Professors");
+  const [profNames, setProfNames] = useState(["All Professors"]);
   const domainNames = [
-    "Structures","Aerodynamics","Propulsion", "Controls", "Other"
+    "All Domains",
+    "Structures",
+    "Aerodynamics",
+    "Propulsion",
+    "Controls",
+    "Other",
   ];
 
   const getProfNames = async () => {
@@ -20,14 +26,18 @@ const AllProjectsPage = () => {
         "auth-token": localStorage.getItem("token"),
       },
     });
-    setProfNames(result.data);
+    const updatedNames = [...profNames, ...result.data];
+    setProfNames(updatedNames);
     console.log(result.data);
     // console.log(result.data.name);
   };
 
   useEffect(() => {
-    getProfNames();
-  },[]);
+    if(flag){
+      setFlag(false);
+      getProfNames();
+    }
+  }, []);
 
   useEffect(() => {
     getPdf();
@@ -80,8 +90,8 @@ const AllProjectsPage = () => {
         project.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.prof.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (selectedDomain === "" || project.domain === selectedDomain) &&
-      (selectedProfessor === "" || project.prof === selectedProfessor)
+      (selectedDomain === "All Domains" || project.domain === selectedDomain) &&
+      (selectedProfessor === "All Professors" || project.prof === selectedProfessor)
     );
   });
 
@@ -147,31 +157,17 @@ const AllProjectsPage = () => {
               {selectedDomain ? selectedDomain : "Domain"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="domainDropdown">
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleDomainChange("")}
-                >
-                  All Domains
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleDomainChange("Domain 1")}
-                >
-                  Domain 1
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleDomainChange("Domain 2")}
-                >
-                  Domain 2
-                </button>
-              </li>
-              {/* Add more options as needed */}
+              {domainNames.map((domain, idx) => (
+                <li>
+                  <button
+                    className="dropdown-item"
+                    key={idx}
+                    onClick={() => handleDomainChange(domain)}
+                  >
+                    {domain}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -188,31 +184,17 @@ const AllProjectsPage = () => {
               {selectedProfessor ? selectedProfessor : "Professor"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="professorDropdown">
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleProfessorChange("")}
-                >
-                  All Professors
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleProfessorChange("Manoranjan Sinha")}
-                >
-                  Manoranjan Sinha
-                </button>
-              </li>
-              <li>
-                <button
-                  className="dropdown-item"
-                  onClick={() => handleProfessorChange(" Mira Mitra")}
-                >
-                  Mira Mitra
-                </button>
-              </li>
-              {/* Add more options as needed */}
+            {profNames.map((prof, idx) => (
+                <li>
+                  <button
+                    className="dropdown-item"
+                    key={idx}
+                    onClick={() => handleProfessorChange(prof)}
+                  >
+                    {prof}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

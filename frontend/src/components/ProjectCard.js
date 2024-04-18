@@ -6,23 +6,24 @@ const port = 5001;
 
 const ProjectCard = (props) => {
   const navigate = useNavigate();
-  const { project, updateProject, flag, md } = props;
-  const deleteProject = async (id) => {
-    const response = await fetch(
-      `http://localhost:${port}/api/projects/deleteproject/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token": localStorage.getItem("token"),
-        },
-      }
-    );
-    const json = await response.json();
-    console.log(json);
-    // const newNotes = notes.filter((note) => { return note._id !== id })
-    // setNotes(newNotes)
-  };
+  const { project, updateProject, deleteProject, flag, md } = props;
+  
+  // const deleteProject = async (id) => {
+  //   const response = await fetch(
+  //     `http://localhost:${port}/api/projects/deleteproject/${id}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "auth-token": localStorage.getItem("token"),
+  //       },
+  //     }
+  //   );
+  //   const json = await response.json();
+  //   console.log(json);
+  //   // const newNotes = notes.filter((note) => { return note._id !== id })
+  //   // setNotes(newNotes)
+  // };
 
   const trimDesc = (desc) => {
       if(desc.length > 50)

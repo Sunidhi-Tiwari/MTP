@@ -26,6 +26,23 @@ const CurrentProjects = () => {
     }
   }, []);
 
+  const deleteProject = async (id) => {
+    const response = await fetch(
+      `http://localhost:${port}/api/projects/deleteproject/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+      }
+    );
+    const json = await response.json();
+    console.log(json);
+    // const newNotes = notes.filter((note) => { return note._id !== id })
+    // setNotes(newNotes)
+  };
+
   // const context = useContext(projectContext);
   const ref = useRef(null)
   const refClose = useRef(null)
@@ -103,6 +120,7 @@ const CurrentProjects = () => {
               <ProjectCard
                 project = {project}
                 updateProject={updateProject}
+                deleteProject={deleteProject}
                 flag = {true}
                 md = {6}
                 key={idx}
