@@ -109,6 +109,42 @@
 .heading {
   color: white;
 }
+
+/* Google login button styles */
+.google_login_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px; /* Adjusted margin for spacing */
+}
+
+.google_login_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 370px; /* Adjusted max-width for consistency */
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: "#B1D0E0"; /* Google red color */
+  color: "#1A374D";
+  transition: background-color 0.3s ease;
+}
+
+.google_login_btn:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add a subtle box shadow on hover */
+}
+
+.google_logo {
+  width: 20px; /* Adjusted size of the Google logo */
+  margin-right: 10px; /* Adjusted margin for spacing */
+}
+
 @media screen and (max-width: 900px) {
   .login_form_container {
     flex-direction: column;
@@ -167,9 +203,5 @@
   .white_btn_login {
     padding: 8px 15px;
     font-size: 13px;
-  }
-  .heading {
-    font-size: 22px;
-    margin-top: 10px;
   }
 }

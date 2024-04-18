@@ -3,6 +3,8 @@ import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+
+import GoogleLogo from "../../images/google.png";
 const port = 5001;
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -13,10 +15,15 @@ const Login = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
+  const handleGoogleLogin = () => {
+    console.log("Google");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = data;
     const url = `http://localhost:${port}/api/auth/login`;
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -38,7 +45,7 @@ const Login = () => {
       alert("Invalid credentials");
     }
     // try {
-    //   const url = `http://localhost:${port}/api/auth`;
+    //   const url = http://localhost:${port}/api/auth;
     //   const { data: res } = await axios.post(url, data);
     //   localStorage.setItem("token", res.data);
     //   window.location = "/";
@@ -82,6 +89,16 @@ const Login = () => {
               Sign In
             </button>
           </form>
+          <div className="google_login_container">
+            <button className="google_login_btn" onClick={handleGoogleLogin}>
+              <img
+                src={GoogleLogo} // Replace this with the Google logo image URL
+                alt="Google Logo"
+                className="google_logo"
+              />
+              Sign in with Google
+            </button>
+          </div>
         </div>
         <div className="rightlogin">
           <h1 className="heading">New Here ?</h1>
