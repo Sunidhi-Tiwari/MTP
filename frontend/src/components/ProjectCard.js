@@ -23,6 +23,12 @@ const ProjectCard = (props) => {
     // const newNotes = notes.filter((note) => { return note._id !== id })
     // setNotes(newNotes)
   };
+
+  const trimDesc = (desc) => {
+      if(desc.length > 50)
+        desc = desc.slice(0,50) + "...."
+      return desc;
+  }
   console.log(project._id);
   return (
     <div className={`col-md-${md}`}>
@@ -50,7 +56,7 @@ const ProjectCard = (props) => {
               <></>
             )}
           </div>
-          <p className="card-text">{project.desc}</p>
+          <p className="card-text">{trimDesc(project.desc)}</p>
           <h7 className="card-text">
             <small className="text-muted">{project.prof}</small>
           </h7>

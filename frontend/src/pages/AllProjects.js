@@ -1,12 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard";
+const port = 5001;
 
 const AllProjectsPage = () => {
   const [allProjects, setAllProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDomain, setSelectedDomain] = useState("");
   const [selectedProfessor, setSelectedProfessor] = useState("");
+  const [profNames, setProfNames] = useState([]);
+  const domainNames = [
+    "Structures","Aerodynamics","Propulsion", "Controls", "Other"
+  ];
+
+  const getProfNames = async () => {
+    const url = `http://localhost:${port}/api/prof/getprofs`;
+    const result = await axios.get(url, {
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    setProfNames(result.data);
+    console.log(result.data);
+    // console.log(result.data.name);
+  };
+
+  useEffect(() => {
+    getProfNames();
+  },[]);
 
   useEffect(() => {
     getPdf();

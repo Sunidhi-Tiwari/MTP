@@ -49,7 +49,7 @@ const ProjectDetails = () => {
     return <p>No project data available.</p>;
   }
 
-  const { title, desc, prof, domain, student, image } = projectData;
+  const { title, desc, prof, domain, student, image, urls } = projectData;
 
   return (
     <div className="research-project">
@@ -74,10 +74,10 @@ const ProjectDetails = () => {
               <b style={{ color: "#406882" }}>Author:</b> {student}
             </p>
           </div>
-          {Resources && Resources.length > 0 && (
+          {urls && urls.length > 0 && (
             <div>
               <h3 style={{ color: "#406882" }}>Resources:</h3>
-              {Resources.map((resource, index) => (
+              {urls.map((resource, index) => (
                 <div key={index}>
                   <a
                     href={resource.url}

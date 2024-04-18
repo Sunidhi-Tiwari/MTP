@@ -9,7 +9,7 @@ const AddProject = () => {
   // const [domain, setDomain] = useState("");
   const [profNames, setProfNames] = useState([]);
   const domainNames = [
-    "Domain 1","Domain 2","Domain 3"
+    "Structures","Aerodynamics","Propulsion", "Controls", "Other"
   ];
 
   const [project, setProject] = useState({
