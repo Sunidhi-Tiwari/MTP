@@ -136,7 +136,7 @@ const Navbar = (props) => {
                           <Link
                             className="dropdown-item"
                             to="/login"
-                            style={{ textDecoration: "none", color: "white" }}
+                            style={{ textDecoration: "none", color: "#1A374D" }}
                           >
                             Login
                           </Link>
@@ -145,7 +145,7 @@ const Navbar = (props) => {
                           <Link
                             className="dropdown-item"
                             to="/signup"
-                            style={{ textDecoration: "none", color: "white" }}
+                            style={{ textDecoration: "none", color: "#1A374D" }}
                           >
                             Signup
                           </Link>

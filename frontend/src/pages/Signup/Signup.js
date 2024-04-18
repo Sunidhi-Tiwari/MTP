@@ -69,7 +69,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup_container">
+    <div className="signup_container" style={{ background: "#B1D0E0" }}>
       <div className="signup_form_container">
         <div className="left">
           <h1>Welcome Back</h1>

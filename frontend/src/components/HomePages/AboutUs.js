@@ -10,10 +10,10 @@ const AboutUsSection = () => {
       <div className="container">
         <div className="row">
           <div className="col-lg-12 mb-4">
-            <h2 className="text-center mb-4" style={{ color: "#1A374D" }}>
+            <h1 className="text-center mb-4" style={{ color: "#406882" }}>
               Our Vision
-            </h2>
-            <p className="text-center" style={{ color: "white" }}>
+            </h1>
+            <p className="text-center" style={{ color: "#1A374D" }}>
               We are Sunidhi Tiwari and Mudit Kumar Bhugari, dual degree
               students from the Department of Aerospace Engineering, IIT
               Kharagpur. Under the guidance of Professor Mira Mitra, we have
@@ -42,10 +42,10 @@ const AboutUsSection = () => {
             >
               <h5 style={{ color: "#1A374D" }}>Professor Mira Mitra</h5>
             </Link>
-            <p style={{ color: "white" }}>
+            <p style={{ color: "#1A374D" }}>
               Department of Aerospace Engineering
             </p>
-            <p style={{ color: "white" }}>IIT Kharagpur</p>
+            <p style={{ color: "#1A374D" }}>IIT Kharagpur</p>
           </div>
           <div className="text-center col-lg-4 mb-4">
             <img
@@ -62,10 +62,10 @@ const AboutUsSection = () => {
             >
               <h5 style={{ color: "#1A374D" }}>Sunidhi Tiwari</h5>
             </Link>
-            <p style={{ color: "white" }}>
+            <p style={{ color: "#1A374D" }}>
               Dual Degree Student, Aerospace Department
             </p>
-            <p style={{ color: "white" }}>IIT Kharagpur</p>
+            <p style={{ color: "#1A374D" }}>IIT Kharagpur</p>
           </div>
           <div className="text-center col-lg-4 mb-4">
             <img
@@ -82,10 +82,10 @@ const AboutUsSection = () => {
             >
               <h5 style={{ color: "#1A374D" }}>Mudit Kumar Bhugari</h5>
             </Link>
-            <p style={{ color: "white" }}>
+            <p style={{ color: "#1A374D" }}>
               Dual Degree Student, Aerospace Department
             </p>
-            <p style={{ color: "white" }}>IIT Kharagpur</p>
+            <p style={{ color: "#1A374D" }}>IIT Kharagpur</p>
           </div>
         </div>
       </div>
