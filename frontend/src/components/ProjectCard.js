@@ -33,7 +33,7 @@ const ProjectCard = (props) => {
   );
 
   function handleApprove(id) {
-    // Handle approval logic here
+    // Handle approval logic
     console.log(`Project with ID ${id} approved.`);
   }
 };
