@@ -5,13 +5,18 @@ const port = 5001;
 
 const AddProject = () => {
   const host = "http://localhost:5001";
-  const [profval, setProfval] = useState("");
-  const [domainval, setDomainval] = useState("");
+  // const [prof, setProf] = useState("");
+  // const [domain, setDomain] = useState("");
   const [profNames, setProfNames] = useState([]);
+  const domainNames = [
+    "Domain 1","Domain 2","Domain 3"
+  ];
 
   const [project, setProject] = useState({
     title: "",
     desc: "",
+    prof: "",
+    domain: "",
     imageUrl: "",
     urls: [{ url: "", urlDesc: "" }],
   });
@@ -32,17 +37,12 @@ const AddProject = () => {
     getProfNames();
   },[]);
 
-  const profs = [
-    { label: "Professor 1", value: 1 },
-    { label: "Professor 2", value: 2 },
-    { label: "Professor 3", value: 3 },
-  ];
+  // const profs = [
+  //   { label: "Professor 1", value: 1 },
+  //   { label: "Professor 2", value: 2 },
+  //   { label: "Professor 3", value: 3 },
+  // ];
 
-  const domains = [
-    { label: "Domain 1", value: 1 },
-    { label: "Domain 2", value: 2 },
-    { label: "Domain 3", value: 3 },
-  ];
 
   const onChange = (e, index) => {
     const { name, value } = e.target;
@@ -66,6 +66,10 @@ const AddProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("prof -> ", project.prof);
+    console.log("domain -> ", project.domain);
+    console.log("URLs -> ", project.urls)
+    // console.log("domain -> ", project.domain);
     // API Call
     const response = await fetch(`${host}/api/projects/addproject`, {
       method: "POST",
@@ -76,9 +80,8 @@ const AddProject = () => {
       body: JSON.stringify({
         title: project.title,
         desc: project.desc,
-        prof: profs.find((prof) => prof.value === parseInt(profval))?.label,
-        domain: domains.find((domain) => domain.value === parseInt(domainval))
-          ?.label,
+        prof: project.prof,
+        domain: project.domain,
         imageUrl: project.imageUrl,
         urls: project.urls,
       }),
@@ -89,6 +92,8 @@ const AddProject = () => {
     setProject({
       title: "",
       desc: "",
+      prof:"",
+      domain:"",
       imageUrl: "",
       urls: [{ url: "", urlDesc: "" }],
     });
@@ -163,13 +168,15 @@ const AddProject = () => {
                 </label>
                 <select
                   className="form-select"
-                  value={domainval}
-                  onChange={(e) => setDomainval(e.target.value)}
+                  value={project.domain}
+                  onChange={(e) =>
+                    setProject({ ...project, domain: e.target.value })
+                  }
                 >
-                  <option value="">Select Domain</option>
-                  {domains.map((domain) => (
-                    <option key={domain.value} value={domain.value}>
-                      {domain.label}
+                  {/* <option value="">Select Domain</option> */}
+                  {domainNames.map((domain,idx) => (
+                    <option key={idx} value={domain}>
+                      {domain}
                     </option>
                   ))}
                 </select>
@@ -185,13 +192,15 @@ const AddProject = () => {
                 </label>
                 <select
                   className="form-select"
-                  value={profval}
-                  onChange={(e) => setProfval(e.target.value)}
+                  value={project.prof}
+                  onChange={(e) =>
+                    setProject({ ...project, prof: e.target.value })
+                  }
                 >
-                  <option value="">Select Professor</option>
-                  {profs.map((prof) => (
-                    <option key={prof.value} value={prof.value}>
-                      {prof.label}
+                  {/* <option value="">Select Professor</option> */}
+                  {profNames.map((prof,idx) => (
+                    <option key={idx} value={prof}>
+                      {prof}
                     </option>
                   ))}
                 </select>
