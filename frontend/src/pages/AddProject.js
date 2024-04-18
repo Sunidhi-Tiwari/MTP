@@ -6,7 +6,7 @@ const port = 5001;
 const AddProject = () => {
   const host = "http://localhost:5001";
   // const [prof, setProf] = useState("");
-  // const [domain, setDomain] = useState("");
+  const [image, setImage] = useState("");
   const [profNames, setProfNames] = useState([]);
   const domainNames = [
     "Structures","Aerodynamics","Propulsion", "Controls", "Other"
@@ -51,6 +51,16 @@ const AddProject = () => {
     setProject({ ...project, urls: updatedUrls });
   };
 
+  const handleImage = (e) => {
+    const selectedFile = e.target.files[0];
+    console.log(e.target.files[0])
+    if (selectedFile) {
+      // setSelectedFileName(selectedFile.name); // Set selected file name
+      console.log(selectedFile)
+      setImage(selectedFile);
+    }
+  };
+
   const addUrlInput = () => {
     setProject({
       ...project,
@@ -68,7 +78,8 @@ const AddProject = () => {
     e.preventDefault();
     console.log("prof -> ", project.prof);
     console.log("domain -> ", project.domain);
-    console.log("URLs -> ", project.urls)
+    console.log("URLs -> ", project.urls);
+    console.log("Image -> ", project.imageUrl)
     // console.log("domain -> ", project.domain);
     // API Call
     const response = await fetch(`${host}/api/projects/addproject`, {
@@ -84,6 +95,7 @@ const AddProject = () => {
         domain: project.domain,
         imageUrl: project.imageUrl,
         urls: project.urls,
+        image
       }),
     });
 
@@ -97,6 +109,7 @@ const AddProject = () => {
       imageUrl: "",
       urls: [{ url: "", urlDesc: "" }],
     });
+    setImage("");
   };
 
   return (
@@ -218,10 +231,10 @@ const AddProject = () => {
                   type="file"
                   className="form-control"
                   id="image"
-                  accept="image/*"
-                  onChange={(e) =>
-                    setProject({ ...project, imageUrl: e.target.value })
-                  }
+                  // accept="image/*"
+                  // value = {project.imageUrl}
+                  onChange={handleImage}
+                  
                 />
               </div>
               <br />

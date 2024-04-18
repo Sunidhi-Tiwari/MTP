@@ -150,6 +150,47 @@ router.post('/login',
         }
 });
 
+
+router.post('/glogin', 
+    [   
+        body('email','Enter a valid Email').isEmail()
+    ],
+    async (req,res)=>{
+        let success = false;
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({success, errors : errors.array()});
+        }
+
+        const {email} = req.body;
+        try {
+            let user = await User.findOne({email});
+            if(!user){
+               return res.status(400).json({success, error: "Sorry, user doesn't exists"})
+            }
+
+            // const passwordCompare = await bcrypt.compare(password, user.password);
+
+            // if(!passwordCompare){
+            //     return res.status(400).json({success, error: "Sorry, password didn't match"})
+            // }
+
+            const data = {
+                user:{
+                    id: user.id
+                }
+            }
+            const authToken = jwt.sign(data, JWT_SECRET);
+        // console.log(jwtData);
+        success = true;
+        res.json({success, authToken});
+            
+        } catch (error) {
+            console.error(error.message);
+            res.status(500).send({error:"Internal Server error"});
+        }
+});
+
 // Route 3: Get loggedin user details :POST "api/auth/getuser". N Login required 
 
 router.get('/getuser', fetchuser,

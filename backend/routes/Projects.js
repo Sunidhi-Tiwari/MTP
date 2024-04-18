@@ -19,7 +19,8 @@ router.post(
       try {
         console.log("User -> ", req.user.id)
         const user = await User.findById(req.user.id)
-        const { title, desc, prof, domain, urls } = req.body;
+        const { title, desc, prof, domain, imageUrl, image, urls } = req.body;
+        console.log("Image -> ", image);
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
@@ -33,6 +34,7 @@ router.post(
           prof,
           domain,
           urls,
+          imageUrl
           // urlDesc,
           // status:"Pending"
         });
