@@ -8,8 +8,8 @@ const projectSchema = new Schema({
   student: { type: String, required: true },
   prof: { type: String, required: true },
   domain: { type: String, required: true },
-  url: { type: String, required: true },
-  urlDesc: { type: String, required: true },
+  urls: { type: Object, default:{} },
+  // urlDesc: { type: String, default:"" },
   status: { type: String, default: "pending" },
 });
 

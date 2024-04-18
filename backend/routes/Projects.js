@@ -19,7 +19,7 @@ router.post(
       try {
         console.log("User -> ", req.user.id)
         const user = await User.findById(req.user.id)
-        const { title, desc, prof, domain, url, urlDesc } = req.body;
+        const { title, desc, prof, domain, urls } = req.body;
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
@@ -32,8 +32,8 @@ router.post(
           student: user.name,
           prof,
           domain,
-          url,
-          urlDesc,
+          urls,
+          // urlDesc,
           // status:"Pending"
         });
 
