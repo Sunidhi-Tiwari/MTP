@@ -1,0 +1,65 @@
+.btn {
+  background: #6998ab;
+  padding: 10px;
+  height: 40px;
+  border-color: #406882;
+  border-width: 2px;
+  font-weight: bold;
+  color: #1a374d;
+  margin: 10px;
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.btn:hover {
+  background-color: #1a374d; /* Hover background color */
+  color: white; /* Hover border color */
+  border-width: 3px;
+}
+
+.features {
+  position: inherit;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(22, 17, 17);
+}
+
+#f1,
+#f2 {
+  /* position: absolute; */
+  top: 10%;
+  width: 45%;
+  height: 38%;
+  left: 2%;
+}
+
+#f2 {
+  left: 50%;
+}
+
+#f3,
+#f4 {
+  /* position: absolute; */
+  top: 55%;
+  width: 45%;
+  height: 38%;
+  left: 2%;
+}
+
+#f4 {
+  left: 50%;
+}
+
+.row1,
+.row2 {
+  position: absolute;
+  left: 15%;
+  top: 20%;
+}
+
+.row2 {
+  top: 45%;
+}

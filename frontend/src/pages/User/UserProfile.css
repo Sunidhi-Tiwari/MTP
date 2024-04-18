@@ -1,0 +1,122 @@
+.userprofile {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(177, 208, 224);
+  height: 100%;
+}
+
+.userprofilein {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10vh;
+  gap: 20px;
+}
+
+.userprofile .userprofilein .left_profile {
+  width: 20%;
+
+  border: 1px solid #1a374d;
+  border-radius: 5px;
+  min-height: 50vh;
+  margin-bottom: 40px;
+}
+
+.userprofile .userprofilein .right_profile {
+  width: 60%;
+
+  border: 1px solid #1a374d;
+  border: 1px solid;
+  border-radius: 5px;
+  min-height: 50vh;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1000px) {
+  .userprofile .userprofilein .left_profile {
+    width: 30%;
+
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+  }
+
+  .userprofilein {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .userprofile .userprofilein .left_profile {
+    width: 30%;
+
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+  }
+  .userprofile .userprofilein .right_profile {
+    width: 68%;
+
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+  }
+
+  .userprofilein {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .userprofile .userprofilein .left_profile {
+    width: 20%;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+  }
+  .userprofile .userprofilein .right_profile {
+    width: 78%;
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 500px) {
+  .userprofilein {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10vh;
+    gap: 20px;
+  }
+
+  .userprofile .userprofilein .left_profile {
+    width: 97%;
+
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    /* min-height: 50vh; */
+    align-self: center;
+    min-height: 0;
+  }
+
+  .userprofile .userprofilein .right_profile {
+    width: 97%;
+
+    border: 1px solid rgb(207, 207, 207);
+    border-radius: 5px;
+    /* min-height: 50vh; */
+    align-self: center;
+    min-height: 0;
+  }
+}

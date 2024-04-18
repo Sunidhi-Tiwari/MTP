@@ -1,0 +1,151 @@
+/* Default styles */
+.signup_container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #406882;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup_form_container {
+  width: 90%;
+  max-width: 900px;
+  height: auto;
+  display: flex;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+    0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #6998ab;
+  border-radius: 10px;
+}
+
+.left h1 {
+  margin-top: 0;
+  color: white;
+  font-size: 35px;
+  align-self: center;
+}
+
+.right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #b1d0e0;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form_container h1 {
+  font-size: 40px;
+  margin-top: 0;
+  color: #1a374d;
+}
+
+.input {
+  outline: none;
+  border: none;
+  width: 100%;
+  max-width: 370px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #edf5f3;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.error_msg {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0;
+  font-size: 14px;
+  background-color: #f34646;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.white_btn,
+.green_btn {
+  border: none;
+  outline: none;
+  padding: 12px 0;
+  border-radius: 20px;
+  max-width: 400px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.green_btn {
+  background-color: #1a374d;
+  color: white;
+  margin: 10px;
+  width: 50%;
+}
+
+.white_btn {
+  background-color: white;
+  color: #1a374d;
+  margin: 10px;
+  width: 100%;
+}
+
+/* Media queries for tablet */
+@media screen and (max-width: 1024px) {
+  .signup_form_container {
+    flex-direction: column;
+  }
+}
+
+/* Media queries for mobile */
+@media screen and (max-width: 768px) {
+  .signup_form_container {
+    width: 90%; /* Adjusted width to 100% for full-width on mobile */
+
+    box-shadow: none; /* Removed box-shadow for cleaner appearance on mobile */
+  }
+
+  .input,
+  .white_btn,
+  .green_btn {
+    width: 100%;
+    margin: 5px auto;
+    font-size: 14px;
+  }
+
+  .input {
+    max-width: 900px;
+  }
+
+  .green_btn {
+    max-width: 100px;
+  }
+
+  .white_btn {
+    max-width: 2000px;
+    margin: 10px;
+  }
+
+  .form_container h1 {
+    font-size: 30px; /* Reduced font size for better readability on mobile */
+  }
+}
