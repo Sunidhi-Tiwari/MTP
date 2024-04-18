@@ -8,7 +8,7 @@ import AboutUsSection from "../components/HomePages/AboutUs";
 
 const Home = () => {
   return (
-    <div style={{ background: "#406882" }}>
+    <div style={{ background: "#6998AB" }}>
       <FirstPage />
       <KeyFeatures />
       <FAQs />

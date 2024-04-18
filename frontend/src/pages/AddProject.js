@@ -35,7 +35,7 @@ const AddProject = () => {
 
   useEffect(() => {
     getProfNames();
-  },[]);
+  }, []);
 
   // const profs = [
   //   { label: "Professor 1", value: 1 },

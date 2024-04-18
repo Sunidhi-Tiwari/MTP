@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../images/aerospace.jpg";
-import ProjectImage from "../components/ProjectImage/ProjectImage";
+import ProjectImage from "./ProjectImage/ProjectImage";
 const port = 5001;
 
 const ProjectCard = (props) => {
@@ -33,7 +33,11 @@ const ProjectCard = (props) => {
   return (
     <div className={`col-md-${md}`}>
       <div className="card my-3 mx-2">
-        <ProjectImage src={img} className="card-img-top" alt="project" />
+        <ProjectImage
+          projectimage={img}
+          className="card-img-top"
+          alt="project"
+        />
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{project.title}</h5>

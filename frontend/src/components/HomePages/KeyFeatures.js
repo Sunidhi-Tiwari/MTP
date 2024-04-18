@@ -9,7 +9,7 @@ const KeyFeatures = () => {
     },
     {
       title: "Project Search",
-      desc: "Quickly find projects of interest using keywords or filters.",
+      desc: "Efficiently locate projects based on specific keywords or filters like domain and professor, facilitating quick and precise exploration.",
     },
     {
       title: "User Profiles",
@@ -17,7 +17,7 @@ const KeyFeatures = () => {
     },
     {
       title: "Project Management",
-      desc: "Seamlessly manage project submissions, approvals, and updates.",
+      desc: "Simplifies the management of project submissions, approvals, and updates, ensuring a smooth workflow from start to finish.",
     },
     // {
     //   title: "Email Notifications",
@@ -25,11 +25,11 @@ const KeyFeatures = () => {
     // },
     {
       title: "Secure Authentication",
-      desc: "Ensure data security with secure user authentication and authorization.",
+      desc: "Guarantees data security by implementing authorization measures, safeguarding sensitive information effectively.",
     },
     {
       title: "Responsive Design",
-      desc: "Access the platform from any device with a responsive and mobile-friendly design.",
+      desc: "Seamless accessibility and usability on desktops, laptops, tablets, and smartphones with optimal user experience.",
     },
 
     // {
@@ -41,7 +41,7 @@ const KeyFeatures = () => {
   return (
     <div
       className="container"
-      style={{ background: "#406882", color: "white" }}
+      style={{ background: "#6998AB", color: "#1A374D" }}
     >
       <br></br>
       <br></br>
