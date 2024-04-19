@@ -76,7 +76,6 @@ router.put("/approve/:id", fetchuser, async (req, res) => {
 
 router.get(
   "/getprofs",
-  fetchuser,
   async (req, res) => {
     try {
       const profs = await User.find({

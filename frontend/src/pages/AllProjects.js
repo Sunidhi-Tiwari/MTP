@@ -21,11 +21,7 @@ const AllProjectsPage = () => {
 
   const getProfNames = async () => {
     const url = `http://localhost:${port}/api/prof/getprofs`;
-    const result = await axios.get(url, {
-      headers: {
-        "auth-token": localStorage.getItem("token"),
-      },
-    });
+    const result = await axios.get(url);
     const updatedNames = [...profNames, ...result.data];
     setProfNames(updatedNames);
     console.log(result.data);
@@ -204,7 +200,7 @@ const AllProjectsPage = () => {
         {filteredProjects.length === 0
           ? noProjectsMessage
           : filteredProjects.map((project, idx) => (
-              <ProjectCard project={project} flag={false} md={4} key={idx} />
+              <ProjectCard project={project} page = "all" flag={false} md={4} key={idx} />
             ))}
       </div>
     </div>

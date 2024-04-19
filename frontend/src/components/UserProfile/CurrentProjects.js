@@ -122,6 +122,7 @@ const CurrentProjects = () => {
                 updateProject={updateProject}
                 deleteProject={deleteProject}
                 flag = {true}
+                page = "current"
                 md = {6}
                 key={idx}
               />

@@ -133,6 +133,7 @@ const PendingRequests = () => {
                 project = {project}
                 updateProject={updateProject}
                 deleteProject={deleteProject}
+                page = "pending"
                 flag = {true}
                 md = {6}
                 key={idx}

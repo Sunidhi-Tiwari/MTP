@@ -11,8 +11,8 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   // verified: { type: Boolean, default: false },
-  pending: { type: Object, default: {} },
-  approved: { type: Object, default: {} },
+  // pending: { type: Object, default: {} },
+  // approved: { type: Object, default: {} },
 });
 
 const User = mongoose.model('user', UserSchema);
