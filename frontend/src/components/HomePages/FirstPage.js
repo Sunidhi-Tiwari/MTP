@@ -25,13 +25,6 @@ const FirstPage = () => {
         >
           Explore Projects
         </button>
-        <button
-          type="button"
-          className="btn"
-          onClick={() => navigate("/projects")}
-        >
-          Learn More &rarr;
-        </button>
       </div>
       <br></br>
       <br></br>

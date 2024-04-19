@@ -7,9 +7,11 @@
 
 .mainbutton1 {
   background: none;
-  border: 1px solid var(--col1);
+  border: 1px;
+  border-color: "#1A374D";
   padding: 10px 20px;
   border-radius: 5px;
+  background: "#406882";
   font-size: 1.5rem;
   font-weight: 300;
   margin: 1rem;
