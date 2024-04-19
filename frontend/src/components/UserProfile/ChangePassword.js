@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./AccountSettings.css";
+const port = 5001;
 
 const ChangePassword = () => {
   const [passwordData, setPasswordData] = useState({
-    oldPassword: "",
+    currentPassword: "",
     newPassword: "",
   });
 
@@ -15,8 +16,19 @@ const ChangePassword = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const url = `http://localhost:${port}/api/auth/changePassword`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem('token')
+      },
+      body: JSON.stringify({currentPassword: passwordData.currentPassword, newPassword: passwordData.newPassword})
+    });
+    const json = await response.json(); 
+    console.log(json.response);
 
     console.log("Password data submitted:", passwordData);
   };
@@ -27,13 +39,13 @@ const ChangePassword = () => {
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="oldpass">
-            Old Password <span>*</span>
+          <label htmlFor="currentpass">
+            Current Password <span>*</span>
           </label>
           <input
             type="password"
-            name="oldPassword"
-            value={passwordData.oldPassword}
+            name="currentPassword"
+            value={passwordData.currentPassword}
             onChange={handleChange}
           />
         </div>

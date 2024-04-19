@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AccountSettings.css";
+const port = 5001;
 
 const AccountSettings = () => {
   const [formData, setFormData] = useState({
@@ -17,9 +18,19 @@ const AccountSettings = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const url = `http://localhost:${port}/api/users/accountSettings`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem('token')
+      },
+      body: JSON.stringify({name: formData.name, email: formData.email, rollNumber: formData.rollNumber, phone: formData.phone})
+    });
+    const json = await response.json(); 
+    console.log(json.response);
     console.log("Form submitted:", formData);
   };
 

@@ -28,35 +28,128 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-router.get('/pendingProjects', fetchuser, async(req,res) => {
+router.get("/pendingProjects", fetchuser, async (req, res) => {
   try {
-    const projects = await Project.find({user:req.user.id, status: "pending"})
-    if(!projects) {
+    const user = await User.findById(req.user.id);
+    if (!user) {
       return res.status(404).send("Not Found");
     }
+    if(user.type === 'prof'){
+      const projects = await Project.find({
+        prof: user.name,
+        status: "pending",
+      });
+      if (!projects) {
+        return res.status(404).send("Not Found");
+      }
 
-    res.json(projects);
-  }
-  catch (error) {
-    console.error(error.message)
+      res.json(projects);
+    }
+    else{
+      const projects = await Project.find({
+        user: req.user.id,
+        status: "pending",
+      });
+      if (!projects) {
+        return res.status(404).send("Not Found");
+      }
+
+      res.json(projects);
+    }
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send("Internal server error");
   }
-})
+});
 
-router.get('/approvedProjects', fetchuser, async(req,res) => {
+router.get("/approvedProjects", fetchuser, async (req, res) => {
   try {
-    const projects = await Project.find({user:req.user.id, status: "approved"})
-    if(!projects) {
+    const user = await User.findById(req.user.id);
+    if (!user) {
       return res.status(404).send("Not Found");
     }
+    if(user.type === 'prof'){
+      const projects = await Project.find({
+        prof: user.name,
+        status: "approved",
+      });
+      if (!projects) {
+        return res.status(404).send("Not Found");
+      }
 
-    res.json(projects);
-  }
-  catch (error) {
-    console.error(error.message)
+      res.json(projects);
+    }
+    else{
+      const projects = await Project.find({
+        user: req.user.id,
+        status: "approved",
+      });
+      if (!projects) {
+        return res.status(404).send("Not Found");
+      }
+
+      res.json(projects);
+    }
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send("Internal server error");
   }
-})
+});
+
+router.put("/accountSettings", fetchuser, async (req, res) => {
+  try {
+    const { name, email, phone, rollNumber } = req.body;
+    let user = await User.findById(req.user.id)
+    user.name = name;
+    user.email = email;
+    user.phone = phone;
+    user.rollNumber = rollNumber;
+    console.log("User -> ", user)
+    const newUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { $set: user },
+      { new: true }
+    );
+    console.log("newUser", newUser)
+    // const projects = await Project.find({user:req.user.id, status: "approved"})
+    // if(!projects) {
+    //   return res.status(404).send("Not Found");
+    // }
+
+    res.json({ response: "User info updated" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server error");
+  }
+});
+
+// router.put("/changePassword", fetchuser, async (req, res) => {
+//   try {
+//     const { currentPassword, newPassword } = req.body;
+//     let success = false;
+//     let user = await User.findById(req.user.id);
+//     if (!user) {
+//       return res
+//         .status(400)
+//         .json({ success, error: "Sorry, user doesn't exists" });
+//     }
+
+//     const passwordCompare = await bcrypt.compare(currentPassword, user.password);
+
+//     if(!passwordCompare){
+//         return res.status(400).json({success, error: "Sorry, password didn't match"})
+//     }
+
+//     user = User.findByIdAndUpdate(req.user.id, {
+//       password: newPassword,
+//     });
+//     console.log(user);
+//     success = true;
+//     res.json({success, response: "Password Changed Successfully" });
+//   } catch (error) {
+//     console.error(error.message);
+//     res.status(500).send("Internal server error");
+//   }
+// });
 
 module.exports = router;

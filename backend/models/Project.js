@@ -9,6 +9,7 @@ const projectSchema = new Schema({
   prof: { type: String, required: true },
   domain: { type: String, required: true },
   urls: { type: Object, default:{} },
+  imageUrl: { type: String, default:"" },
   // urlDesc: { type: String, default:"" },
   status: { type: String, default: "pending" },
 });

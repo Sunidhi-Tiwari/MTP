@@ -19,7 +19,8 @@ router.post(
       try {
         console.log("User -> ", req.user.id)
         const user = await User.findById(req.user.id)
-        const { title, desc, prof, domain, urls } = req.body;
+        const { title, desc, prof, domain, imageUrl, image, urls } = req.body;
+        console.log("Image -> ", image);
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
@@ -33,6 +34,7 @@ router.post(
           prof,
           domain,
           urls,
+          imageUrl
           // urlDesc,
           // status:"Pending"
         });
@@ -125,6 +127,44 @@ router.post(
       if (project.user.toString() !== req.user.id) {
         return res.status(401).send("Not Allowed");
       }
+  
+      project = await Project.findByIdAndUpdate(
+        req.params.id,
+        { $set: newProject },
+        { new: true }
+      );
+      res.json({ project });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal server error");
+    }
+  });
+
+
+  router.put("/approveProject/:id", fetchuser, async (req, res) => {
+    try {
+      let user = await User.findById(req.user.id);
+      if (!user) {
+        return res.status(404).send("User Not found");
+      }
+      // FInd the project to be approved
+      let project = await Project.findById(req.params.id);
+      if (!project) {
+        return res.status(404).send("Not found");
+      }
+
+      if(user.name !== project.prof){
+        return res.status(404).send("You can not approve this project");
+      }
+
+
+      const newProject = {};
+        newProject.status = "approved";
+  
+  
+      // if (project.user.toString() !== req.user.id) {
+      //   return res.status(401).send("Not Allowed");
+      // }
   
       project = await Project.findByIdAndUpdate(
         req.params.id,
