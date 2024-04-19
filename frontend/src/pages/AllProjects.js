@@ -33,7 +33,7 @@ const AllProjectsPage = () => {
   };
 
   useEffect(() => {
-    if(flag){
+    if (flag) {
       setFlag(false);
       getProfNames();
     }
@@ -91,7 +91,8 @@ const AllProjectsPage = () => {
         project.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.prof.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (selectedDomain === "All Domains" || project.domain === selectedDomain) &&
-      (selectedProfessor === "All Professors" || project.prof === selectedProfessor)
+      (selectedProfessor === "All Professors" ||
+        project.prof === selectedProfessor)
     );
   });
 
@@ -105,7 +106,7 @@ const AllProjectsPage = () => {
         All Projects
       </h2>
       <div className="row mb-3 justify-content-between align-items-center">
-        <div className="col-md-6">
+        <div className="col-md-8">
           <div className="input-group">
             <input
               type="text"
@@ -144,7 +145,7 @@ const AllProjectsPage = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-2">
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
@@ -171,7 +172,7 @@ const AllProjectsPage = () => {
             </ul>
           </div>
         </div>
-        <div className="col-md-3">
+        <div className="col-md-2">
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
@@ -184,7 +185,7 @@ const AllProjectsPage = () => {
               {selectedProfessor ? selectedProfessor : "Professor"}
             </button>
             <ul className="dropdown-menu" aria-labelledby="professorDropdown">
-            {profNames.map((prof, idx) => (
+              {profNames.map((prof, idx) => (
                 <li>
                   <button
                     className="dropdown-item"

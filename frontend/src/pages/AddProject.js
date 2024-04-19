@@ -9,7 +9,11 @@ const AddProject = () => {
   const [image, setImage] = useState("");
   const [profNames, setProfNames] = useState([]);
   const domainNames = [
-    "Structures","Aerodynamics","Propulsion", "Controls", "Other"
+    "Structures",
+    "Aerodynamics",
+    "Propulsion",
+    "Controls",
+    "Other",
   ];
 
   const [project, setProject] = useState({
@@ -43,7 +47,6 @@ const AddProject = () => {
   //   { label: "Professor 3", value: 3 },
   // ];
 
-
   const onChange = (e, index) => {
     const { name, value } = e.target;
     const updatedUrls = [...project.urls];
@@ -53,10 +56,10 @@ const AddProject = () => {
 
   const handleImage = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(e.target.files[0])
+    console.log(e.target.files[0]);
     if (selectedFile) {
       // setSelectedFileName(selectedFile.name); // Set selected file name
-      console.log(selectedFile)
+      console.log(selectedFile);
       setImage(selectedFile);
     }
   };
@@ -79,7 +82,7 @@ const AddProject = () => {
     console.log("prof -> ", project.prof);
     console.log("domain -> ", project.domain);
     console.log("URLs -> ", project.urls);
-    console.log("Image -> ", project.imageUrl)
+    console.log("Image -> ", project.imageUrl);
     // console.log("domain -> ", project.domain);
     // API Call
     const response = await fetch(`${host}/api/projects/addproject`, {
@@ -95,7 +98,7 @@ const AddProject = () => {
         domain: project.domain,
         imageUrl: project.imageUrl,
         urls: project.urls,
-        image
+        image,
       }),
     });
 
@@ -104,8 +107,8 @@ const AddProject = () => {
     setProject({
       title: "",
       desc: "",
-      prof:"",
-      domain:"",
+      prof: "",
+      domain: "",
       imageUrl: "",
       urls: [{ url: "", urlDesc: "" }],
     });
@@ -168,6 +171,8 @@ const AddProject = () => {
                   }
                   minLength={5}
                   required
+                  // Add the following CSS to preserve line breaks
+                  style={{ whiteSpace: "pre-wrap" }}
                 />
               </div>
               <br />
@@ -187,7 +192,7 @@ const AddProject = () => {
                   }
                 >
                   {/* <option value="">Select Domain</option> */}
-                  {domainNames.map((domain,idx) => (
+                  {domainNames.map((domain, idx) => (
                     <option key={idx} value={domain}>
                       {domain}
                     </option>
@@ -211,7 +216,7 @@ const AddProject = () => {
                   }
                 >
                   {/* <option value="">Select Professor</option> */}
-                  {profNames.map((prof,idx) => (
+                  {profNames.map((prof, idx) => (
                     <option key={idx} value={prof}>
                       {prof}
                     </option>
@@ -234,7 +239,6 @@ const AddProject = () => {
                   // accept="image/*"
                   // value = {project.imageUrl}
                   onChange={handleImage}
-                  
                 />
               </div>
               <br />

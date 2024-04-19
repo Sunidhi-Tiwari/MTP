@@ -60,7 +60,7 @@ const ProjectDetails = () => {
       <div className="content-section">
         <div className="left-column">
           <h3 style={{ color: "#406882" }}>Description of Project</h3>
-          <p style={{ color: "#1A374D" }}>{desc}</p>
+          <p style={{ color: "#1A374D", whiteSpace: "pre-wrap" }}>{desc}</p>
         </div>
         <div className="right-column">
           <div>
