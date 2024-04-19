@@ -140,4 +140,42 @@ router.post(
     }
   });
 
+
+  router.put("/approveProject/:id", fetchuser, async (req, res) => {
+    try {
+      let user = await User.findById(req.user.id);
+      if (!user) {
+        return res.status(404).send("User Not found");
+      }
+      // FInd the project to be approved
+      let project = await Project.findById(req.params.id);
+      if (!project) {
+        return res.status(404).send("Not found");
+      }
+
+      if(user.name !== project.prof){
+        return res.status(404).send("You can not approve this project");
+      }
+
+
+      const newProject = {};
+        newProject.status = "approved";
+  
+  
+      // if (project.user.toString() !== req.user.id) {
+      //   return res.status(401).send("Not Allowed");
+      // }
+  
+      project = await Project.findByIdAndUpdate(
+        req.params.id,
+        { $set: newProject },
+        { new: true }
+      );
+      res.json({ project });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal server error");
+    }
+  });
+
   module.exports = router;
