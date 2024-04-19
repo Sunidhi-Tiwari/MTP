@@ -6,7 +6,6 @@ import ProjectImage from "./ProjectImage/ProjectImage";
 const port = 5001;
 
 const ProjectCard = (props) => {
-
   const navigate = useNavigate();
   const { project, updateProject, deleteProject, flag, md } = props;
   const [type, setType] = useState("");
@@ -24,9 +23,13 @@ const ProjectCard = (props) => {
     console.log(result.data.type);
   };
 
+  const handleApprove = () => {
+    console.log("Project approved");
+  };
+
   useEffect(() => {
     getType();
-  }, [])
+  }, []);
 
   // const deleteProject = async (id) => {
   //   const response = await fetch(
@@ -46,10 +49,9 @@ const ProjectCard = (props) => {
   // };
 
   const trimDesc = (desc) => {
-      if(desc.length > 50)
-        desc = desc.slice(0,50) + "...."
-      return desc;
-  }
+    if (desc.length > 50) desc = desc.slice(0, 50) + "....";
+    return desc;
+  };
   console.log(project._id);
   return (
     <div className={`col-md-${md}`}>
@@ -62,7 +64,7 @@ const ProjectCard = (props) => {
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{project.title}</h5>
-            {flag && (type === 'user') ? (
+            {flag && type === "user" ? (
               <>
                 <i
                   className="far fa-trash-alt mx-3"
@@ -82,21 +84,20 @@ const ProjectCard = (props) => {
             )}
           </div>
           <p className="card-text">{trimDesc(project.desc)}</p>
-          <h7 className="card-text">
-            <small className="text-muted">{project.prof}</small>
-          </h7>
-          <br></br>
-          <h7 className="card-text">
-            <small className="text-muted">{project.domain}</small>
-          </h7>
+
           <br></br>
           <br></br>
-          <button
-            className="btn btn-primary"
-            onClick={() => navigate(`/projectdetails/${project._id}`)}
-          >
-            Read More
-          </button>
+          <div className="d-flex">
+            <button
+              className="btn btn-primary"
+              onClick={() => navigate(`/projectdetails/${project._id}`)}
+            >
+              Read More
+            </button>
+            <button className="btn btn-success" onClick={handleApprove}>
+              Approve
+            </button>
+          </div>
         </div>
       </div>
     </div>
