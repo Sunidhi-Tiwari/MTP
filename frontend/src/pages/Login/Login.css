@@ -171,6 +171,11 @@
     padding-bottom: 10px;
   }
 
+  .google_login_container {
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+
   .heading {
     font-size: 22px;
     margin-top: 10px;
