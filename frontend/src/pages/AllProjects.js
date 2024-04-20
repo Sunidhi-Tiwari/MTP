@@ -110,12 +110,16 @@ const AllProjectsPage = () => {
               placeholder="Search for project"
               value={searchTerm}
               onChange={handleSearchChange}
-              style={{ borderColor: "#1A374D" }}
+              style={{ borderColor: "#1A374D", paddingRight: "2.5rem" }} // Adjust paddingRight to accommodate the icon
             />
             <div className="input-group-append">
               <span
                 className="input-group-text"
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  borderColor: "#1A374D",
+                  backgroundColor: "#fff",
+                }} // Set background color to match input field
                 onClick={handleSearchSubmit}
               >
                 <svg
