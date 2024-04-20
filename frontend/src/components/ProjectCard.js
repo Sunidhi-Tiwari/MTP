@@ -28,20 +28,19 @@ const ProjectCard = (props) => {
   const handleApprove = async() => {
     const url = `${host}/api/projects/approveProject/${project._id}`;
     const response = await fetch(url, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
         // 'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": localStorage.getItem("token"),
       },
     });
-    const json = await response.json(); 
+    const json = await response.json();
     console.log(json);
     console.log("Project approved");
   };
 
   useEffect(() => {
-    if(page !== "all")
-      getType();
+    if (page !== "all") getType();
   }, []);
 
   const trimDesc = (desc) => {
@@ -53,34 +52,43 @@ const ProjectCard = (props) => {
   return (
     <div className={`col-md-${md}`}>
       <div className="card my-3 mx-2">
-        <ProjectImage
-          projectimage={img}
-          className="card-img-top"
-          alt="project"
-        />
+        {!project.image ? (
+          <ProjectImage
+            projectimage={img}
+            className="card-img-top"
+            alt="project"
+          />
+        ) : (
+          <ProjectImage
+            projectimage={`http://localhost:5001/files/${project.image}`}
+            className="card-img-top"
+            alt="project"
+          />
+        )}
+
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{project.title}</h5>
-            {(page !== "all") ? (
-                <i
-                  className="far fa-trash-alt mx-3"
-                  onClick={() => {
-                    deleteProject(project._id);
-                  }}
-                ></i>
-                ) : (
+            {page !== "all" ? (
+              <i
+                className="far fa-trash-alt mx-3"
+                onClick={() => {
+                  deleteProject(project._id);
+                }}
+              ></i>
+            ) : (
               <></>
             )}
 
-            {((page !== "all") && (type === "user")) ? (
-                <i
-                  className="far fa-edit"
-                  onClick={() => {
-                    updateProject(project);
-                  }}
-                ></i>
-              ) : (
-                <></>
+            {page !== "all" && type === "user" ? (
+              <i
+                className="far fa-edit"
+                onClick={() => {
+                  updateProject(project);
+                }}
+              ></i>
+            ) : (
+              <></>
             )}
           </div>
           <p className="card-text">{trimDesc(project.desc)}</p>
@@ -94,10 +102,13 @@ const ProjectCard = (props) => {
             >
               Read More
             </button>
-            {((type === "prof") && (page === "pending"))?(<button className="btn btn-success" onClick={handleApprove}>
-              Approve
-            </button>):(<></>)}
-            
+            {type === "prof" && page === "pending" ? (
+              <button className="btn btn-success" onClick={handleApprove}>
+                Approve
+              </button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

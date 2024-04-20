@@ -50,12 +50,52 @@ const ProjectDetails = () => {
 
   const { title, desc, prof, domain, student, image, urls } = projectData;
 
+  const handleClick = () => {
+    if (image) {
+      window.open(`http://localhost:5001/files/${image}`, "_blank");
+    } else {
+      window.open("http://localhost:5001/files/aerospace.jpg", "_blank");
+    }
+  };
+
   return (
     <div className="research-project">
-      <div className="top-section">
-        <ProjectImage projectimage={img} alt="Noimg" />
-        <h2 style={{ color: "#406882", fontWeight: "bold" }}>{title}</h2>
+      <div className="top-section" style={{ position: "relative" }}>
+        <div style={{ position: "relative" }}>
+          {!image ? (
+            <ProjectImage
+              projectimage={img}
+              className="card-img-top"
+              alt="project"
+            />
+          ) : (
+            <ProjectImage
+              projectimage={`http://localhost:5001/files/${image}`}
+              className="card-img-top"
+              alt="project"
+            />
+          )}
+          <button
+            className="btn btn-primary"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: 0,
+              margin: "10px",
+              fontSize: "10px",
+              padding: "2px",
+            }}
+            onClick={handleClick}
+          >
+            View full image
+          </button>
+        </div>
+
+        <div>
+          <h2 style={{ color: "#406882", fontWeight: "bold" }}>{title}</h2>
+        </div>
       </div>
+
       <div className="content-section">
         <div className="left-column">
           <h3 style={{ color: "#406882" }}>Description of Project</h3>

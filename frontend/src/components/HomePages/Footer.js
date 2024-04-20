@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-md-12 text-center">
             <p style={{ color: "white" }}>
-              &copy; 2024 AeroPlatform. All rights reserved.
+              &copy; 2024 ProjectNexus. All rights reserved.
             </p>
           </div>
         </div>
