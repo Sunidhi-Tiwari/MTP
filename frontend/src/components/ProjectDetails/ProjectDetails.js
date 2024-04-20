@@ -5,7 +5,11 @@ import { useParams } from "react-router-dom";
 import "./ProjectDetails.css";
 import ProjectImage from "../ProjectImage/ProjectImage";
 import img from "../../images/aerospace.jpg";
-const port = 5001;
+// const port = 5001;
+
+const config = require("../../config_frontend.js");
+
+const host = config.server.host;
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -23,7 +27,7 @@ const ProjectDetails = () => {
   // ];
 
   useEffect(() => {
-    const url = `http://localhost:${port}/api/projects/getproject/${id}`;
+    const url = `${host}/api/projects/getproject/${id}`;
     axios.get(url)
       .then((res) => {
         setProjectData(res.data.data);

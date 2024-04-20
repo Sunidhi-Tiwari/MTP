@@ -6,7 +6,9 @@ import { useGoogleLogin } from '@react-oauth/google';
 import "./Login.css";
 
 import GoogleLogo from "../../images/google.png";
-const port = 5001;
+const config = require("../../config_frontend.js");
+
+const host = config.server.host;
 const Login = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -33,7 +35,7 @@ const Login = (props) => {
             console.log(res);
             console.log(res.data);
             const email = res.data.email;
-            const url = `http://localhost:${port}/api/auth/glogin`;
+            const url = `${host}/api/auth/glogin`;
             const resp = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -67,7 +69,7 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = data;
-    const url = `http://localhost:${port}/api/auth/login`;
+    const url = `${host}/api/auth/login`;
 
     const response = await fetch(url, {
       method: "POST",

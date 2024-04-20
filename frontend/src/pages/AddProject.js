@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const port = 5001;
+const config = require("../config_frontend.js");
+
+const host = config.server.host;
 
 const AddProject = () => {
   const navigate = useNavigate();
-  const host = "http://localhost:5001";
-  // const [prof, setProf] = useState("");
+  const [flag, setFlag] = useState(true);
   const [image, setImage] = useState("");
   const [profNames, setProfNames] = useState([]);
+
   const domainNames = [
     "Structures",
     "Aerodynamics",
@@ -28,19 +30,23 @@ const AddProject = () => {
   });
 
   const getProfNames = async () => {
-    const url = `http://localhost:${port}/api/prof/getprofs`;
+    const url = `${host}/api/prof/getprofs`;
     const result = await axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem("token"),
       },
     });
     setProfNames(result.data);
+    // setProfNames(prevProfNames => [...prevProfNames, ...result.data]);
     console.log(result.data);
     // console.log(result.data.name);
   };
 
   useEffect(() => {
-    getProfNames();
+    if(flag){
+      setFlag(false);
+      getProfNames();
+    }
   }, []);
 
   // const profs = [
@@ -172,7 +178,7 @@ const AddProject = () => {
                   Description
                 </label>
                 <textarea
-                  rows="5"
+                  rows="15"
                   className="form-control"
                   placeholder="Describe your project in detail "
                   name="desc"
@@ -187,13 +193,15 @@ const AddProject = () => {
                 />
               </div>
               <br />
-              <div className="mb-3">
+              {/* -md-center */}
+              <div className="d-grid gap-2 d-md-flex justify-content-evenly">
+              <div className="mb-3" style={{ width: "250px"}}>
                 <label
                   htmlFor="domain"
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Choose a Domain
+                  Choose a domain
                 </label>
                 <select
                   className="form-select"
@@ -202,7 +210,7 @@ const AddProject = () => {
                     setProject({ ...project, domain: e.target.value })
                   }
                 >
-                  {/* <option value="">Select Domain</option> */}
+                  <option value="">No domain chosen</option>
                   {domainNames.map((domain, idx) => (
                     <option key={idx} value={domain}>
                       {domain}
@@ -210,14 +218,14 @@ const AddProject = () => {
                   ))}
                 </select>
               </div>
-              <br />
-              <div className="mb-3">
+              {/* <br /> */}
+              <div className="mb-3" style={{ width: "250px"}}>
                 <label
                   htmlFor="professor"
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Choose Professor
+                  Choose a professor
                 </label>
                 <select
                   className="form-select"
@@ -226,7 +234,7 @@ const AddProject = () => {
                     setProject({ ...project, prof: e.target.value })
                   }
                 >
-                  {/* <option value="">Select Professor</option> */}
+                  <option value="">No professor chosen</option>
                   {profNames.map((prof, idx) => (
                     <option key={idx} value={prof}>
                       {prof}
@@ -234,14 +242,15 @@ const AddProject = () => {
                   ))}
                 </select>
               </div>
-              <br />
-              <div className="mb-3">
+              
+              {/* <br /> */}
+              <div className="mb-3" style={{ width: "250px"}}>
                 <label
                   htmlFor="image"
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Choose a cover photo for your project
+                  Choose a cover photo
                 </label>
                 <input
                   type="file"
@@ -252,6 +261,7 @@ const AddProject = () => {
                   accept=".png, .jpg, .jpeg"
                   onChange={handleImage}
                 />
+              </div>
               </div>
               <br />
 

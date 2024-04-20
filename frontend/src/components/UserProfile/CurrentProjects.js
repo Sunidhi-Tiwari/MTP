@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import ProjectCard from "../ProjectCard";
 
-const port = 5001;
+const config = require("../../config_frontend.js");
+
+const host = config.server.host;
 
 const CurrentProjects = () => {
   const [projectIds, setProjectIds] = useState([]);
   let [flag, setFlag] = useState(true);
   const getProjects = async () => {
-    const url = `http://localhost:${port}/api/users/approvedProjects`;
+    const url = `${host}/api/users/approvedProjects`;
     const result = await axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem("token"),
@@ -28,7 +30,7 @@ const CurrentProjects = () => {
 
   const deleteProject = async (id) => {
     const response = await fetch(
-      `http://localhost:${port}/api/projects/deleteproject/${id}`,
+      `${host}/api/projects/deleteproject/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -54,7 +56,7 @@ const CurrentProjects = () => {
   }
 
   const handleClick = async (e)=>{ 
-    const url = `http://localhost:${port}/api/projects/updateproject/${project.id}`;
+    const url = `${host}/api/projects/updateproject/${project.id}`;
     const response = await fetch(url, {
       method: 'PUT',
       headers: {

@@ -3,7 +3,9 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./Signup.css";
 
-const port = 5001;
+const config = require("../../config_frontend.js");
+
+const host = config.server.host;
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -28,7 +30,7 @@ const Signup = () => {
     //     props.showAlert("Passwords donot match",'danger');
     // }
     // else{
-    const url = `http://localhost:${port}/api/auth/createuser`;
+    const url = `${host}/api/auth/createuser`;
     // const url = `${host}/api/auth/createuser`;
     const { name, rollNumber, phone, email, password } = data;
 
