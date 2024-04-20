@@ -9,7 +9,7 @@ import GoogleLogo from "../../images/google.png";
 const config = require("../../config_frontend.js");
 
 const host = config.server.host;
-const Login = () => {
+const Login = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Login = () => {
         console.log(res);
         console.log(res.data);
         const email = res.data.email;
-        const url = `http://localhost:${port}/api/auth/glogin`;
+        const url = `${host}/api/auth/glogin`;
         const resp = await fetch(url, {
           method: "POST",
           headers: {

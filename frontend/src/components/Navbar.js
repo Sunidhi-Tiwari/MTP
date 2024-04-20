@@ -36,7 +36,7 @@ const Navbar = (props) => {
     e.preventDefault();
     localStorage.removeItem("token");
     navigate("/login");
-    Alert("Logged out succesfully", "success");
+    props.showAlert("Logged out succesfully", "success");
   };
 
   const handleAddProject = () => {
