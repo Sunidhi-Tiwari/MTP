@@ -41,7 +41,7 @@ const ProjectDetails = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p>Sorry!! This page doesn't exist</p>;
   }
 
   if (!projectData) {

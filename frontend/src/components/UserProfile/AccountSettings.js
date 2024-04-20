@@ -77,15 +77,14 @@ const AccountSettings = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="phone">
-            Phone/Mobile <span>*</span>
-          </label>
+          <label htmlFor="rollNumber">Roll Number</label>
           <input
             type="text"
-            name="phone"
-            id="phone"
-            value={formData.phone}
+            name="rollNumber"
+            id="rollNumber"
+            value={formData.rollNumber}
             onChange={handleChange}
+            disabled
           />
         </div>
 
@@ -99,10 +98,25 @@ const AccountSettings = () => {
             id="email"
             value={formData.email}
             onChange={handleChange}
+            required
           />
         </div>
 
         <div className="form-group">
+          <label htmlFor="phone">
+            Phone/Mobile <span>*</span>
+          </label>
+          <input
+            type="text"
+            name="phone"
+            id="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        {/* <div className="form-group">
           <label htmlFor="rollNumber">Roll Number</label>
           <input
             type="text"
@@ -110,8 +124,9 @@ const AccountSettings = () => {
             id="rollNumber"
             value={formData.rollNumber}
             onChange={handleChange}
+            disabled
           />
-        </div>
+        </div> */}
 
         <button type="submit" className="mainbutton1">
           Save Changes

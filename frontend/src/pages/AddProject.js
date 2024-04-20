@@ -87,6 +87,11 @@ const AddProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(project.title.trim() === "" || project.desc.trim() === "" || project.prof === "" || project.domain === ""){
+      alert("Please add all the required fields")
+    }
+    else{
+
     console.log("prof -> ", project.prof);
     console.log("domain -> ", project.domain);
     console.log("URLs -> ", project.urls);
@@ -130,6 +135,7 @@ const AddProject = () => {
       urls: [{ url: "", urlDesc: "" }],
     });
     setImage("");
+  }
   };
 
   return (
@@ -153,7 +159,7 @@ const AddProject = () => {
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Project Title
+                  Project Title *
                 </label>
                 <input
                   type="text"
@@ -175,7 +181,7 @@ const AddProject = () => {
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Description
+                  Description *
                 </label>
                 <textarea
                   rows="15"
@@ -201,7 +207,7 @@ const AddProject = () => {
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Choose a domain
+                  Choose a domain *
                 </label>
                 <select
                   className="form-select"
@@ -225,7 +231,7 @@ const AddProject = () => {
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Choose a professor
+                  Choose a professor *
                 </label>
                 <select
                   className="form-select"

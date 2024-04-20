@@ -30,7 +30,17 @@ const ChangePassword = () => {
       body: JSON.stringify({currentPassword: passwordData.currentPassword, newPassword: passwordData.newPassword})
     });
     const json = await response.json(); 
-    console.log(json.response);
+    console.log(json);
+    if(!json.success){
+      alert("Sorry! your current password is incorrect")
+    }
+    else{
+      alert("Password changed successfully");
+      setPasswordData({
+        currentPassword: "",
+        newPassword: "",
+      });
+    }
 
     console.log("Password data submitted:", passwordData);
   };
