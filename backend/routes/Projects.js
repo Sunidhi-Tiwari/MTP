@@ -6,9 +6,21 @@ const User = require("../models/User");
 // const Prof = require("../models/Prof");
 const { body, validationResult } = require("express-validator");
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './files')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+    cb(null, uniqueSuffix + file.originalname)
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.post(
-    "/addproject", fetchuser,
+    "/addproject", fetchuser,upload.single('file'),
     [
       body("title", "Enter a valid title").isLength({ min: 3 }),
       body("desc", "Description must be atleast 5 characters").isLength({
@@ -16,16 +28,24 @@ router.post(
       }),
     ],
     async (req, res) => {
+      console.log(req);
+      console.log(req.file);  
+      console.log("Hii");
+      // const title = req.body.title;
+      const fileName = req.file.filename;
+      console.log(fileName)
       try {
         console.log("User -> ", req.user.id)
         const user = await User.findById(req.user.id)
-        const { title, desc, prof, domain, imageUrl, image, urls } = req.body;
-        console.log("Image -> ", image);
+        const { title, desc, prof, domain, urls } = req.body;
+        // console.log("Image -> ", image);
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
         }
         console.log("Student -> ", user.name);
+        const parsedURLs = JSON.parse(urls);
+        console.log(parsedURLs);
         const project = await Project.create({
           user: req.user.id,
           title,
@@ -33,33 +53,31 @@ router.post(
           student: user.name,
           prof,
           domain,
-          urls,
-          imageUrl
-          // urlDesc,
-          // status:"Pending"
+          urls:parsedURLs,
+          image: fileName,
         });
 
-        const professor = await User.findOne({ type: "prof", name: prof });
-        if (!professor)
-            return res.status(401).send({ message: "Invalid Professor" });
-        const pId = professor._id;
-        const profUpdated = await User.findOneAndUpdate(
-          { _id:  pId},
-          { $push: { pending: project._id } },
-          { new: true }
-        );
+        // const professor = await User.findOne({ type: "prof", name: prof });
+        // if (!professor)
+        //     return res.status(401).send({ message: "Invalid Professor" });
+        // const pId = professor._id;
+        // const profUpdated = await User.findOneAndUpdate(
+        //   { _id:  pId},
+        //   { $push: { pending: project._id } },
+        //   { new: true }
+        // );
 
 
         // const user = await User.findById( req.user.id );
-        if (!user)
-            return res.status(401).send({ message: "Invalid User" });
+        // if (!user)
+        //     return res.status(401).send({ message: "Invalid User" });
 
-        const userUpdated = await User.findOneAndUpdate(
-          { _id: req.user.id },
-          { $push: { pending: project._id } },
-          { new: true }
-        );
-        console.log(userUpdated);
+        // const userUpdated = await User.findOneAndUpdate(
+        //   { _id: req.user.id },
+        //   { $push: { pending: project._id } },
+        //   { new: true }
+        // );
+        // console.log(userUpdated);
 
         res.json(project);
       } catch (error) {

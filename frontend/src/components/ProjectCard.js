@@ -47,6 +47,7 @@ const ProjectCard = (props) => {
     return desc;
   };
   console.log(project._id);
+  console.log(project.image);
   return (
     <div className={`col-md-${md}`}>
       <div className="card my-3 mx-2">

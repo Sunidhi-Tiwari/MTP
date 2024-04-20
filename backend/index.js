@@ -7,6 +7,7 @@ const userRoutes = require("./routes/Users");
 const authRoutes = require("./routes/Auth");
 const projectRoutes = require("./routes/Projects");
 const profRoutes = require("./routes/Prof");
+const bodyParser = require('body-parser');
 
 // database connection
 connection();
@@ -14,6 +15,9 @@ connection();
 // middlewares
 app.use(express.json());
 app.use(cors());
+app.use("/files", express.static("files"))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // routes
 app.use("/api/users", userRoutes);
