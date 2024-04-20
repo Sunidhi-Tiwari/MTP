@@ -15,21 +15,16 @@ const ProjectDetails = () => {
   const [error, setError] = useState(null);
 
   // Example random array of resources
-  const Resources = [
-    { url: "https://www.google.com", urlDesc: "Google" },
-    { url: "https://www.youtube.com", urlDesc: "YouTube" },
-    { url: "https://www.amazon.com", urlDesc: "Amazon" },
-    { url: "https://www.flipkart.com", urlDesc: "Flipkart" },
-  ];
+  // const Resources = [
+  //   { url: "https://www.google.com", urlDesc: "Google" },
+  //   { url: "https://www.youtube.com", urlDesc: "YouTube" },
+  //   { url: "https://www.amazon.com", urlDesc: "Amazon" },
+  //   { url: "https://www.flipkart.com", urlDesc: "Flipkart" },
+  // ];
 
   useEffect(() => {
     const url = `http://localhost:${port}/api/projects/getproject/${id}`;
-    axios
-      .get(url, {
-        headers: {
-          "auth-token": localStorage.getItem("token"),
-        },
-      })
+    axios.get(url)
       .then((res) => {
         setProjectData(res.data.data);
         setLoading(false);

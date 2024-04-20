@@ -1,14 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./AccountSettings.css";
 const port = 5001;
 
 const AccountSettings = () => {
+  let [flag, setFlag] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
     rollNumber: "",
   });
+
+  const getDetails = async () => {
+    const url = `http://localhost:${port}/api/auth/getuser`;
+    const result = await axios.get(url, {
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    setFormData({name: result.data.name, phone: result.data.phone, email: result.data.email, rollNumber: result.data.rollNumber})
+    console.log(result.data);
+    console.log(result.data.name);
+  };
+
+  useEffect(() => {
+    if (flag) {
+      setFlag(false);
+      getDetails();
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +68,7 @@ const AccountSettings = () => {
             type="text"
             name="name"
             id="name"
+            disabled="true"
             value={formData.name}
             onChange={handleChange}
           />

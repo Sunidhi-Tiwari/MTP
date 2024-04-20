@@ -36,6 +36,15 @@ const Navbar = (props) => {
     navigate("/login");
     // props.showAlert("Logged out succesfully", "success");
   };
+
+  const handleAddProject = () => {
+    if(!localStorage.getItem('token')){
+      alert("Please login");
+      navigate('/login');
+    }
+    else
+      navigate("/addproject");
+  };
   return (
     <nav
       className="navbar navbar-expand-lg sticky-top"
@@ -93,6 +102,7 @@ const Navbar = (props) => {
                   location.pathname === "/allProjects" ? "active" : ""
                 }`}
                 to="/allProjects"
+                
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Projects
@@ -103,7 +113,8 @@ const Navbar = (props) => {
                 className={`nav-link ${
                   location.pathname === "/addProject" ? "active" : ""
                 }`}
-                to="/addProject"
+                // to="/addProject"
+                onClick = {handleAddProject}
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Add Project

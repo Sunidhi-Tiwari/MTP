@@ -80,7 +80,7 @@ router.post(
     }
   })
 
-  router.get('/getproject/:id', fetchuser, async (req, res) => {
+  router.get('/getproject/:id', async (req, res) => {
     try {
       Project.findById(req.params.id).then((data) => {
         console.log("Project -> ", data)
@@ -144,6 +144,7 @@ router.post(
   router.put("/approveProject/:id", fetchuser, async (req, res) => {
     try {
       let user = await User.findById(req.user.id);
+      console.log(user);
       if (!user) {
         return res.status(404).send("User Not found");
       }

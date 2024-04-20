@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const port = 5001;
 
 const AddProject = () => {
+  const navigate = useNavigate();
   const host = "http://localhost:5001";
   // const [prof, setProf] = useState("");
   const [image, setImage] = useState("");

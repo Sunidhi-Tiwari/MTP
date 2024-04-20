@@ -7,7 +7,7 @@ const port = 5001;
 
 const ProjectCard = (props) => {
   const navigate = useNavigate();
-  const { project, updateProject, deleteProject, flag, md } = props;
+  const { project, updateProject, deleteProject, page, md } = props;
   const [type, setType] = useState("");
   // let [flag, setFlag] = useState(true);
   const getType = async () => {
@@ -23,30 +23,24 @@ const ProjectCard = (props) => {
     console.log(result.data.type);
   };
 
-  const handleApprove = () => {
+  const handleApprove = async() => {
+    const url = `http://localhost:${port}/api/projects/approveProject/${project._id}`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        // 'Content-Type': 'application/json',
+        "auth-token": localStorage.getItem('token')
+      },
+    });
+    const json = await response.json(); 
+    console.log(json);
     console.log("Project approved");
   };
 
   useEffect(() => {
-    getType();
+    if(page !== "all")
+      getType();
   }, []);
-
-  // const deleteProject = async (id) => {
-  //   const response = await fetch(
-  //     `http://localhost:${port}/api/projects/deleteproject/${id}`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "auth-token": localStorage.getItem("token"),
-  //       },
-  //     }
-  //   );
-  //   const json = await response.json();
-  //   console.log(json);
-  //   // const newNotes = notes.filter((note) => { return note._id !== id })
-  //   // setNotes(newNotes)
-  // };
 
   const trimDesc = (desc) => {
     if (desc.length > 50) desc = desc.slice(0, 50) + "....";
@@ -64,23 +58,26 @@ const ProjectCard = (props) => {
         <div className="card-body">
           <div className="d-flex align-items-center">
             <h5 className="card-title">{project.title}</h5>
-            {flag && type === "user" ? (
-              <>
+            {(page !== "all") ? (
                 <i
                   className="far fa-trash-alt mx-3"
                   onClick={() => {
                     deleteProject(project._id);
                   }}
                 ></i>
+                ) : (
+              <></>
+            )}
+
+            {((page !== "all") && (type === "user")) ? (
                 <i
                   className="far fa-edit"
                   onClick={() => {
                     updateProject(project);
                   }}
                 ></i>
-              </>
-            ) : (
-              <></>
+              ) : (
+                <></>
             )}
           </div>
           <p className="card-text">{trimDesc(project.desc)}</p>
@@ -94,9 +91,10 @@ const ProjectCard = (props) => {
             >
               Read More
             </button>
-            <button className="btn btn-success" onClick={handleApprove}>
+            {((type === "prof") && (page === "pending"))?(<button className="btn btn-success" onClick={handleApprove}>
               Approve
-            </button>
+            </button>):(<></>)}
+            
           </div>
         </div>
       </div>
