@@ -84,28 +84,37 @@ const AddProject = () => {
     console.log("prof -> ", project.prof);
     console.log("domain -> ", project.domain);
     console.log("URLs -> ", project.urls);
-    console.log("Image -> ", project.imageUrl);
-    // console.log("domain -> ", project.domain);
-    // API Call
-    const response = await fetch(`${host}/api/projects/addproject`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        title: project.title,
-        desc: project.desc,
-        prof: project.prof,
-        domain: project.domain,
-        imageUrl: project.imageUrl,
-        urls: project.urls,
-        image,
-      }),
-    });
+    // console.log("Image -> ", project.imageUrl);
+    
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("title", project.title);
+    formData.append("desc", project.desc);
+    formData.append("prof", project.prof);
+    formData.append("domain", project.domain);
+    formData.append("urls", JSON.stringify(project.urls));
+    console.log(image);
+    console.log(formData);
 
-    const resp = await response.json();
-    console.log(resp);
+    // API Call
+    const result = await axios.post(`${host}/api/projects/addproject`, formData, {
+      headers: {
+        // "Content-Type": "application/json",
+        "Content-type": "multipart/form-data",
+        "auth-token": localStorage.getItem("token"),
+      }
+    })
+    .then( res => {
+        alert("Uploaded Successfully" + res)
+      }
+    )
+    .catch( er => console.log("error", er));
+
+        // alert("Uploaded Successfully")
+
+    // const resp = await response.json();
+    // console.log(resp);
+
     setProject({
       title: "",
       desc: "",
@@ -240,6 +249,7 @@ const AddProject = () => {
                   id="image"
                   // accept="image/*"
                   // value = {project.imageUrl}
+                  accept=".png, .jpg, .jpeg"
                   onChange={handleImage}
                 />
               </div>

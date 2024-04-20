@@ -7,7 +7,7 @@ import "./Login.css";
 
 import GoogleLogo from "../../images/google.png";
 const port = 5001;
-const Login = () => {
+const Login = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -47,13 +47,13 @@ const Login = () => {
                 // Save the auth token and redirect
                 console.log(json.authToken);
                 localStorage.setItem('token', json.authToken);
-                // props.showAlert("Logged in successfully", 'success');
-                alert("Logged In Successfully")
+                props.showAlert("Logged in successfully", 'success');
+                // alert("Logged In Successfully")
                 navigate('/');
             }
             else {
-                // props.showAlert("Invalid credentials", 'danger')
-                alert("Invalid credentials")
+                props.showAlert("Invalid credentials", 'danger')
+                // alert("Invalid credentials")
             }
         }
         catch (err) {
@@ -82,12 +82,12 @@ const Login = () => {
       // Save the auth token and redirect
       console.log(json.authToken);
       localStorage.setItem("token", json.authToken);
-      // props.showAlert("Logged in successfully",'success')
-      alert("Logged in successfully");
+      props.showAlert("Logged in successfully",'success')
+      // alert("Logged in successfully");
       navigate("/");
     } else {
-      // props.showAlert("Invalid credentials",'danger')
-      alert("Invalid credentials");
+      props.showAlert("Invalid credentials",'danger')
+      // alert("Invalid credentials");
     }
     // try {
     //   const url = http://localhost:${port}/api/auth;

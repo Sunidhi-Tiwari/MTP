@@ -34,12 +34,12 @@ const Navbar = (props) => {
     e.preventDefault();
     localStorage.removeItem("token");
     navigate("/login");
-    // props.showAlert("Logged out succesfully", "success");
+    props.showAlert("Logged out succesfully", "success");
   };
 
   const handleAddProject = () => {
     if(!localStorage.getItem('token')){
-      alert("Please login");
+      props.showAlert("Please login first to add project", "danger");
       navigate('/login');
     }
     else
@@ -109,7 +109,7 @@ const Navbar = (props) => {
               </Link>
             </li>
             <li className="nav-item mx-2">
-              <Link
+              <button
                 className={`nav-link ${
                   location.pathname === "/addProject" ? "active" : ""
                 }`}
@@ -118,7 +118,7 @@ const Navbar = (props) => {
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Add Project
-              </Link>
+              </button>
             </li>
             {/* <li className="nav-item mx-2">
               <Link
