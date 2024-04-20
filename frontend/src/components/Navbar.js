@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import Logo from "../images/navbaricon.png";
 const port = 5001;
 const Navbar = (props) => {
   let location = useLocation();
@@ -47,7 +47,11 @@ const Navbar = (props) => {
           to="/"
           style={{ textDecoration: "none", color: "white" }}
         >
-          Project Collab Hub
+          <img
+            src={Logo}
+            alt="ProjectNexus"
+            style={{ maxHeight: "40px", marginRight: "10px" }}
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -61,7 +65,16 @@ const Navbar = (props) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+          <ul
+            className="navbar-nav mx-auto mb-2 mb-lg-0 text-center"
+            style={{
+              position: "fixed",
+              left: "50%",
+              transform: "translateX(-50%)",
+              margin: 0,
+              padding: 0,
+            }}
+          >
             <li className="nav-item mx-2">
               <Link
                 className={`nav-link ${
@@ -107,7 +120,7 @@ const Navbar = (props) => {
               </Link>
             </li> */}
           </ul>
-          <form className="d-flex">
+          <form className="d-flex justify-content-end">
             <div
               className="collapse navbar-collapse"
               id="navbarNavDarkDropdown"
