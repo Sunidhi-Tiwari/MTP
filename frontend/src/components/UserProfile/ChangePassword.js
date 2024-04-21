@@ -22,15 +22,28 @@ const ChangePassword = () => {
     e.preventDefault();
     const url = `${host}/api/auth/changePassword`;
     const response = await fetch(url, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({currentPassword: passwordData.currentPassword, newPassword: passwordData.newPassword})
+      body: JSON.stringify({
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword,
+      }),
     });
-    const json = await response.json(); 
+    const json = await response.json();
     console.log(json);
+
+    if (!json.success) {
+      alert("Sorry! your current password is incorrect");
+    } else {
+      alert("Password changed successfully");
+      setPasswordData({
+        currentPassword: "",
+        newPassword: "",
+      });
+    }
 
     console.log("Password data submitted:", passwordData);
   };
@@ -64,9 +77,11 @@ const ChangePassword = () => {
           />
         </div>
 
-        <button type="submit" className="mainbutton1">
-          Save Changes
-        </button>
+        <div className="center-button">
+          <button type="submit" className="mainbutton1">
+            Save Changes
+          </button>
+        </div>
       </form>
     </div>
   );

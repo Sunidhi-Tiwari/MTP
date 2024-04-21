@@ -23,7 +23,8 @@ body,
   min-height: calc(
     100% - 50px
   ); /* Adjust the height according to your footer height */
-  padding-bottom: 0px; /* Adjust the value to match the height of your footer */
+  padding-bottom: 0px;
+  /* Adjust the value to match the height of your footer */
 }
 
 .Footer {

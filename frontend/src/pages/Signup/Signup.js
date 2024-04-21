@@ -26,7 +26,11 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `${host}/api/auth/createuser`;
+    //   if(cred.password !== cred.cpassword){
+    //     props.showAlert("Passwords donot match",'danger');
+    // }
+    // else{
+    const url = `http://localhost:${port}/api/auth/createuser`;
     // const url = `${host}/api/auth/createuser`;
     const { name, rollNumber, phone, email, password } = data;
 
@@ -43,6 +47,7 @@ const Signup = () => {
       alert("Account created successfully");
       navigate("/");
     } else {
+      // props.showAlert("Invalid credentials",'danger')
       alert("Invalid credentials");
     }
     console.log(output);

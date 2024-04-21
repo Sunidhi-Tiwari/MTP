@@ -2,14 +2,14 @@ import { useState } from "react";
 import React from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from "@react-oauth/google";
 import "./Login.css";
 
 import GoogleLogo from "../../images/google.png";
 const config = require("../../config_frontend.js");
 
 const host = config.server.host;
-const Login = () => {
+const Login = (props) => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -23,46 +23,44 @@ const Login = () => {
   // };
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (response) => {
-        try {
-            const res = await axios.get(
-                "https://www.googleapis.com/oauth2/v3/userinfo",
-                {
-                    headers: {
-                        Authorization: `Bearer ${response.access_token}`
-                    }
-                }
-            )
-            console.log(res);
-            console.log(res.data);
-            const email = res.data.email;
-            const url = `${host}/api/auth/glogin`;
-            const resp = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email })
-            });
-            const json = await resp.json()
-            console.log(json);
-            if (json.success) {
-                // Save the auth token and redirect
-                console.log(json.authToken);
-                localStorage.setItem('token', json.authToken);
-                // alert("Logged In Successfully")
-                navigate('/');
-            }
-            else {
-                // alert("Invalid credentials")
-            }
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${response.access_token}`,
+            },
+          }
+        );
+        console.log(res);
+        console.log(res.data);
+        const email = res.data.email;
+        const url = `${host}/api/auth/glogin`;
+        const resp = await fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+        const json = await resp.json();
+        console.log(json);
+        if (json.success) {
+          // Save the auth token and redirect
+          console.log(json.authToken);
+          localStorage.setItem("token", json.authToken);
+          props.showAlert("Logged in successfully", "success");
+          // alert("Logged In Successfully")
+          navigate("/");
+        } else {
+          props.showAlert("Invalid credentials", "danger");
+          // alert("Invalid credentials")
         }
-        catch (err) {
-            console.log(err);
-        }
-    }
-
-
-});
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -82,9 +80,11 @@ const Login = () => {
       // Save the auth token and redirect
       console.log(json.authToken);
       localStorage.setItem("token", json.authToken);
+      props.showAlert("Logged in successfully", "success");
       // alert("Logged in successfully");
       navigate("/");
     } else {
+      props.showAlert("Invalid credentials", "danger");
       // alert("Invalid credentials");
     }
     // try {

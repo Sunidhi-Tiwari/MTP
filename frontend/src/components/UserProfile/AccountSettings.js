@@ -21,7 +21,12 @@ const AccountSettings = () => {
         "auth-token": localStorage.getItem("token"),
       },
     });
-    setFormData({name: result.data.name, phone: result.data.phone, email: result.data.email, rollNumber: result.data.rollNumber})
+    setFormData({
+      name: result.data.name,
+      phone: result.data.phone,
+      email: result.data.email,
+      rollNumber: result.data.rollNumber,
+    });
     console.log(result.data);
     console.log(result.data.name);
   };
@@ -45,14 +50,19 @@ const AccountSettings = () => {
     e.preventDefault();
     const url = `${host}/api/users/accountSettings`;
     const response = await fetch(url, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({name: formData.name, email: formData.email, rollNumber: formData.rollNumber, phone: formData.phone})
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        rollNumber: formData.rollNumber,
+        phone: formData.phone,
+      }),
     });
-    const json = await response.json(); 
+    const json = await response.json();
     console.log(json.response);
     console.log("Form submitted:", formData);
   };
@@ -128,9 +138,11 @@ const AccountSettings = () => {
           />
         </div> */}
 
-        <button type="submit" className="mainbutton1">
-          Save Changes
-        </button>
+        <div className="center-button">
+          <button type="submit" className="mainbutton1">
+            Save Changes
+          </button>
+        </div>
       </form>
     </div>
   );

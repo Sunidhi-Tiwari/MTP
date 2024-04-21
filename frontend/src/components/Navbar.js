@@ -40,12 +40,10 @@ const Navbar = (props) => {
   };
 
   const handleAddProject = () => {
-    if(!localStorage.getItem('token')){
-      props.showAlert("Please login first to add project", "danger");
-      navigate('/login');
-    }
-    else
-      navigate("/addproject");
+    if (!localStorage.getItem("token")) {
+      // props.showAlert("Please login first to add project", "danger");
+      navigate("/login");
+    } else navigate("/addproject");
   };
   return (
     <nav
@@ -104,7 +102,6 @@ const Navbar = (props) => {
                   location.pathname === "/allProjects" ? "active" : ""
                 }`}
                 to="/allProjects"
-                
                 style={{ textDecoration: "none", color: "white" }}
               >
                 All Projects
@@ -116,7 +113,7 @@ const Navbar = (props) => {
                   location.pathname === "/addProject" ? "active" : ""
                 }`}
                 // to="/addProject"
-                onClick = {handleAddProject}
+                onClick={handleAddProject}
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Add Project
@@ -133,10 +130,11 @@ const Navbar = (props) => {
               </Link>
             </li> */}
           </ul>
-          <form className="d-flex justify-content-end" 
-              // style={{position: "absolute",
-              // left: "94%",}}
-              >
+          <form
+            className="d-flex justify-content-end"
+            // style={{position: "absolute",
+            // left: "94%",}}
+          >
             <div
               className="collapse navbar-collapse"
               id="navbarNavDarkDropdown"
