@@ -87,11 +87,6 @@ const AddProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(project.title.trim() === "" || project.desc.trim() === "" || project.prof === "" || project.domain === ""){
-      alert("Please add all the required fields")
-    }
-    else{
-
     console.log("prof -> ", project.prof);
     console.log("domain -> ", project.domain);
     console.log("URLs -> ", project.urls);
@@ -135,7 +130,6 @@ const AddProject = () => {
       urls: [{ url: "", urlDesc: "" }],
     });
     setImage("");
-  }
   };
 
   return (

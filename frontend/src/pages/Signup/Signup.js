@@ -26,10 +26,6 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //   if(cred.password !== cred.cpassword){
-    //     props.showAlert("Passwords donot match",'danger');
-    // }
-    // else{
     const url = `${host}/api/auth/createuser`;
     // const url = `${host}/api/auth/createuser`;
     const { name, rollNumber, phone, email, password } = data;
@@ -44,11 +40,9 @@ const Signup = () => {
     const output = await response.json();
     if (output.success) {
       localStorage.setItem("token", output.authToken);
-      // props.showAlert("Account created successfully",'success')
       alert("Account created successfully");
       navigate("/");
     } else {
-      // props.showAlert("Invalid credentials",'danger')
       alert("Invalid credentials");
     }
     console.log(output);

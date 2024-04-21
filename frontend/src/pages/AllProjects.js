@@ -103,6 +103,7 @@ const AllProjectsPage = () => {
       >
         All Projects
       </h2>
+      <div className="d-grid gap-2 d-md-flex justify-content-between">
       <div className="row mb-3 justify-content-between align-items-center">
         <div className="col-md-8">
           <div className="input-group">
@@ -201,6 +202,7 @@ const AllProjectsPage = () => {
             </ul>
           </div>
         </div>
+      </div>
       </div>
       <div className="row">
         {filteredProjects.length === 0
