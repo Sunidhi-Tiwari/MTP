@@ -9,11 +9,10 @@ const AllProjectsPage = () => {
   const [flag, setFlag] = useState(true);
   const [allProjects, setAllProjects] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedDomain, setSelectedDomain] = useState("All Domains");
-  const [selectedProfessor, setSelectedProfessor] = useState("All Professors");
-  const [profNames, setProfNames] = useState(["All Professors"]);
+  const [selectedDomain, setSelectedDomain] = useState("");
+  const [selectedProfessor, setSelectedProfessor] = useState("");
+  const [profNames, setProfNames] = useState([]);
   const domainNames = [
-    "All Domains",
     "Structures",
     "Aerodynamics",
     "Propulsion",
@@ -24,8 +23,8 @@ const AllProjectsPage = () => {
   const getProfNames = async () => {
     const url = `${host}/api/prof/getprofs`;
     const result = await axios.get(url);
-    const updatedNames = [...profNames, ...result.data];
-    setProfNames(updatedNames);
+    // const updatedNames = [...profNames, ...result.data];
+    setProfNames(result.data);
     console.log(result.data);
     // console.log(result.data.name);
   };
@@ -88,8 +87,8 @@ const AllProjectsPage = () => {
         project.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.prof.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (selectedDomain === "All Domains" || project.domain === selectedDomain) &&
-      (selectedProfessor === "All Professors" ||
+      (selectedDomain === "" || project.domain === selectedDomain) &&
+      (selectedProfessor === "" ||
         project.prof === selectedProfessor)
     );
   });
@@ -103,17 +102,17 @@ const AllProjectsPage = () => {
       >
         All Projects
       </h2>
-      <div className="d-grid gap-2 d-md-flex justify-content-between">
-      <div className="row mb-3 justify-content-between align-items-center">
-        <div className="col-md-8">
-          <div className="input-group">
+      <div className="d-grid gap-5 d-md-flex justify-content-evenly align-items-center">
+      {/* <div className="row mb-3 justify-content-between align-items-center"> */}
+        {/* <div className="col-md-8"> */}
+          <div className="mb-3 input-group">
             <input
               type="text"
               className="form-control"
               placeholder="Search for project"
               value={searchTerm}
               onChange={handleSearchChange}
-              style={{ borderColor: "#1A374D", paddingRight: "2.5rem" }} // Adjust paddingRight to accommodate the icon
+              style={{borderColor: "#1A374D", paddingRight: "10rem" }} // Adjust paddingRight to accommodate the icon
             />
             <div className="input-group-append">
               <span
@@ -147,9 +146,35 @@ const AllProjectsPage = () => {
               </span>
             </div>
           </div>
-        </div>
-        <div className="col-md-2">
-          <div className="dropdown">
+        {/* </div> */}
+        {/* <div className="col-md-2"> */}
+
+        <div className="mb-3" style={{ width: "400px"}}>
+                {/* <label
+                  htmlFor="domain"
+                  className="form-label"
+                  style={{ fontWeight: "600" }}
+                >
+                  Choose a domain *
+                </label> */}
+                <select
+                  className="form-select"
+                  value={selectedDomain}
+                  onChange={(e) =>
+                    setSelectedDomain(e.target.value )
+                  }
+                  style={{borderColor: "#1A374D", fontWeight: "600"}}
+                >
+                  <option value="">All Domains</option>
+                  {domainNames.map((domain, idx) => (
+                    <option key={idx} value={domain}>
+                      {domain}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+          {/* <div className="mb-3 dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
               type="button"
@@ -173,10 +198,37 @@ const AllProjectsPage = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-        <div className="col-md-2">
-          <div className="dropdown">
+          </div> */}
+        {/* </div> */}
+        {/* <div className="col-md-2"> */}
+
+        <div className="mb-3" style={{ width: "400px"}}>
+                {/* <label
+                  htmlFor="professor"
+                  className="form-label"
+                  style={{ fontWeight: "600" }}
+                >
+                  Choose a professor *
+                </label> */}
+                <select
+                  className="form-select"
+                  style={{borderColor: "#1A374D", fontWeight: "600"}}
+                  value={selectedProfessor}
+                  onChange={(e) =>
+                    setSelectedProfessor(e.target.value)
+                  }
+                >
+                  <option value="">All professors</option>
+                  {profNames.map((prof, idx) => (
+                    <option key={idx} value={prof}>
+                      {prof}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+
+          {/* <div className="mb-3 dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
               type="button"
@@ -200,9 +252,9 @@ const AllProjectsPage = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </div>
+          </div> */}
+        {/* </div> */}
+      {/* </div> */}
       </div>
       <div className="row">
         {filteredProjects.length === 0
