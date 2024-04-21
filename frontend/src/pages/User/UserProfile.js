@@ -9,7 +9,7 @@ import img from "../../images/websitepic.jpg";
 import CurrentProjects from "../../components/UserProfile/CurrentProjects";
 import PendingRequests from "../../components/UserProfile/PendingRequests";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const { activepage } = useParams();
   return (
     <div className="userprofile">
@@ -19,10 +19,10 @@ const UserProfile = () => {
           <UserSidebar activepage={activepage} />
         </div>
         <div className="right_profile">
-          {activepage === "accountsettings" && <AccountSettings />}
-          {activepage === "changepassword" && <ChangePassword />}
-          {activepage === "currentprojects" && <CurrentProjects />}
-          {activepage === "pendingrequests" && <PendingRequests />}
+          {activepage === "accountsettings" && <AccountSettings showAlert = {props.showAlert}/>}
+          {activepage === "changepassword" && <ChangePassword showAlert = {props.showAlert}/>}
+          {activepage === "currentprojects" && <CurrentProjects showAlert = {props.showAlert}/>}
+          {activepage === "pendingrequests" && <PendingRequests showAlert = {props.showAlert}/>}
         </div>
       </div>
     </div>

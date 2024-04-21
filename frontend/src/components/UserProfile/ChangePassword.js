@@ -4,7 +4,7 @@ const config = require("../../config_frontend.js");
 
 const host = config.server.host;
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
     newPassword: "",
@@ -36,9 +36,10 @@ const ChangePassword = () => {
     console.log(json);
 
     if (!json.success) {
-      alert("Sorry! your current password is incorrect");
-    } else {
-      alert("Password changed successfully");
+      props.showAlert("Sorry! your current password is incorrect", "danger");
+    } 
+    else {
+      props.showAlert("Password changed successfully", "success");
       setPasswordData({
         currentPassword: "",
         newPassword: "",

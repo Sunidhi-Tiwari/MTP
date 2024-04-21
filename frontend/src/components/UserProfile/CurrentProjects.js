@@ -6,7 +6,7 @@ const config = require("../../config_frontend.js");
 
 const host = config.server.host;
 
-const CurrentProjects = () => {
+const CurrentProjects = (props) => {
   const [projectIds, setProjectIds] = useState([]);
   let [flag, setFlag] = useState(true);
   const getProjects = async () => {
