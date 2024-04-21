@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Alert from "../components/Alert";
 
 const port = 5001;
 
 const AddProject = () => {
+  const [alert, setAlert] = useState({
+    type: "success",
+    msg: "This is a success message",
+  });
+
   const navigate = useNavigate();
   const host = "http://localhost:5001";
   // const [prof, setProf] = useState("");
@@ -85,49 +91,58 @@ const AddProject = () => {
     console.log("domain -> ", project.domain);
     console.log("URLs -> ", project.urls);
     // console.log("Image -> ", project.imageUrl);
-    
-    const formData = new FormData();
-    formData.append("file", image);
-    formData.append("title", project.title);
-    formData.append("desc", project.desc);
-    formData.append("prof", project.prof);
-    formData.append("domain", project.domain);
-    formData.append("urls", JSON.stringify(project.urls));
-    console.log(image);
-    console.log(formData);
+    if (
+      project.title.trim() === "" ||
+      project.desc.trim() === "" ||
+      project.prof === "" ||
+      project.domain === ""
+    ) {
+      alert("Please add all the required fields");
+    } else {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("title", project.title);
+      formData.append("desc", project.desc);
+      formData.append("prof", project.prof);
+      formData.append("domain", project.domain);
+      formData.append("urls", JSON.stringify(project.urls));
+      console.log(image);
+      console.log(formData);
 
-    // API Call
-    const result = await axios.post(`${host}/api/projects/addproject`, formData, {
-      headers: {
-        // "Content-Type": "application/json",
-        "Content-type": "multipart/form-data",
-        "auth-token": localStorage.getItem("token"),
-      }
-    })
-    .then( res => {
-        alert("Uploaded Successfully" + res)
-      }
-    )
-    .catch( er => console.log("error", er));
+      // API Call
+      const result = await axios
+        .post(`${host}/api/projects/addproject`, formData, {
+          headers: {
+            // "Content-Type": "application/json",
+            "Content-type": "multipart/form-data",
+            "auth-token": localStorage.getItem("token"),
+          },
+        })
+        .then((res) => {
+          alert("Uploaded Successfully");
+        })
+        .catch((er) => console.log("error", er));
 
-        // alert("Uploaded Successfully")
+      // alert("Uploaded Successfully")
 
-    // const resp = await response.json();
-    // console.log(resp);
+      // const resp = await response.json();
+      // console.log(resp);
 
-    setProject({
-      title: "",
-      desc: "",
-      prof: "",
-      domain: "",
-      imageUrl: "",
-      urls: [{ url: "", urlDesc: "" }],
-    });
-    setImage("");
+      setProject({
+        title: "",
+        desc: "",
+        prof: "",
+        domain: "",
+        imageUrl: "",
+        urls: [{ url: "", urlDesc: "" }],
+      });
+      setImage("");
+    }
   };
 
   return (
     <div className="container my-5">
+      <Alert alert={alert} />
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div

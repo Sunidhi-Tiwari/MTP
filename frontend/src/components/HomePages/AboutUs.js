@@ -28,18 +28,18 @@ const AboutUsSection = () => {
         </div>
         <div className="row">
           <div className="text-center col-lg-4 mb-4">
-            <img
-              className="rounded-circle mb-3"
-              src={MiraMitraimg}
-              alt="Mira Mitra"
-              style={{ width: "200px", height: "200px" }}
-            />
             <Link
               to="https://www.iitkgp.ac.in/department/AE/faculty/ae-mira"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
             >
+              <img
+                className="rounded-circle mb-3"
+                src={MiraMitraimg}
+                alt="Mira Mitra"
+                style={{ width: "200px", height: "200px" }}
+              />
               <h5 style={{ color: "#1A374D" }}>Professor Mira Mitra</h5>
             </Link>
             <p style={{ color: "#1A374D" }}>
@@ -48,18 +48,18 @@ const AboutUsSection = () => {
             <p style={{ color: "#1A374D" }}>IIT Kharagpur</p>
           </div>
           <div className="text-center col-lg-4 mb-4">
-            <img
-              className="rounded-circle mb-3"
-              src={Sunidhiimg}
-              alt="Sunidhi Tiwari"
-              style={{ width: "200px", height: "200px" }}
-            />
             <Link
               to="https://www.linkedin.com/in/sunidhi-tiwari-3a3072201/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
             >
+              <img
+                className="rounded-circle mb-3"
+                src={Sunidhiimg}
+                alt="Sunidhi Tiwari"
+                style={{ width: "200px", height: "200px" }}
+              />
               <h5 style={{ color: "#1A374D" }}>Sunidhi Tiwari</h5>
             </Link>
             <p style={{ color: "#1A374D" }}>
@@ -68,18 +68,18 @@ const AboutUsSection = () => {
             <p style={{ color: "#1A374D" }}>IIT Kharagpur</p>
           </div>
           <div className="text-center col-lg-4 mb-4">
-            <img
-              className="rounded-circle mb-3"
-              src={Muditimg}
-              alt="Mudit Kumar Bhugari"
-              style={{ width: "200px", height: "200px" }}
-            />
             <Link
               to="https://www.linkedin.com/in/mudit-bhugari-35b1101a6/"
               target="_blank"
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
             >
+              <img
+                className="rounded-circle mb-3"
+                src={Muditimg}
+                alt="Mudit Kumar Bhugari"
+                style={{ width: "200px", height: "200px" }}
+              />
               <h5 style={{ color: "#1A374D" }}>Mudit Kumar Bhugari</h5>
             </Link>
             <p style={{ color: "#1A374D" }}>

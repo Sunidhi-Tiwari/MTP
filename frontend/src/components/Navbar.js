@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../images/navbaricon.png";
+import Alert from "./Alert";
+
 const port = 5001;
 const Navbar = (props) => {
   let location = useLocation();
@@ -34,16 +36,14 @@ const Navbar = (props) => {
     e.preventDefault();
     localStorage.removeItem("token");
     navigate("/login");
-    props.showAlert("Logged out succesfully", "success");
+    Alert("Logged out succesfully", "success");
   };
 
   const handleAddProject = () => {
-    if(!localStorage.getItem('token')){
-      props.showAlert("Please login first to add project", "danger");
-      navigate('/login');
-    }
-    else
-      navigate("/addproject");
+    if (!localStorage.getItem("token")) {
+      // props.showAlert("Please login first to add project", "danger");
+      navigate("/login");
+    } else navigate("/addproject");
   };
   return (
     <nav
@@ -102,7 +102,6 @@ const Navbar = (props) => {
                   location.pathname === "/allProjects" ? "active" : ""
                 }`}
                 to="/allProjects"
-                
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Projects
@@ -114,7 +113,7 @@ const Navbar = (props) => {
                   location.pathname === "/addProject" ? "active" : ""
                 }`}
                 // to="/addProject"
-                onClick = {handleAddProject}
+                onClick={handleAddProject}
                 style={{ textDecoration: "none", color: "white" }}
               >
                 Add Project

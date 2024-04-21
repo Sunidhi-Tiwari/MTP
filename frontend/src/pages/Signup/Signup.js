@@ -24,12 +24,9 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //   if(cred.password !== cred.cpassword){
-    //     props.showAlert("Passwords donot match",'danger');
-    // }
-    // else{
+
     const url = `http://localhost:${port}/api/auth/createuser`;
-    // const url = `${host}/api/auth/createuser`;
+
     const { name, rollNumber, phone, email, password } = data;
 
     const response = await fetch(url, {
@@ -47,7 +44,7 @@ const Signup = () => {
       navigate("/");
     } else {
       // props.showAlert("Invalid credentials",'danger')
-      alert("Invalid credentials");
+      alert("User with this email id already exists");
     }
     console.log(output);
     // }

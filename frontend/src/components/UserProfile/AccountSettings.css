@@ -6,24 +6,30 @@
 }
 
 .mainbutton1 {
-  background: none;
+  background-color: "#406882";
   border: 1px;
+  align-self: center;
   border-color: "#1A374D";
   padding: 10px 20px;
   border-radius: 5px;
-  background: "#406882";
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 300;
   margin: 1rem;
   cursor: pointer;
-  color: var(--col1);
 }
 
 .mainbutton1:hover {
-  background-color: var(--col1);
-  color: white;
+  background-color: "#406882";
+  color: "#1A374D";
   transform: scale(1.1);
   transition: all 0.6s ease-in-out;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  width: 100%; /* Make the container full width */
+  margin-top: 1rem; /* Add margin top if needed */
 }
 
 .accountsettings {
