@@ -3,19 +3,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Alert from "../components/Alert";
 
-const port = 5001;
+const config = require("../config_frontend.js");
+
+const host = config.server.host;
 
 const AddProject = () => {
-  const [alert, setAlert] = useState({
-    type: "success",
-    msg: "This is a success message",
-  });
-
   const navigate = useNavigate();
-  const host = "http://localhost:5001";
-  // const [prof, setProf] = useState("");
+  const [flag, setFlag] = useState(true);
   const [image, setImage] = useState("");
   const [profNames, setProfNames] = useState([]);
+
   const domainNames = [
     "Structures",
     "Aerodynamics",
@@ -34,19 +31,23 @@ const AddProject = () => {
   });
 
   const getProfNames = async () => {
-    const url = `http://localhost:${port}/api/prof/getprofs`;
+    const url = `${host}/api/prof/getprofs`;
     const result = await axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem("token"),
       },
     });
     setProfNames(result.data);
+    // setProfNames(prevProfNames => [...prevProfNames, ...result.data]);
     console.log(result.data);
     // console.log(result.data.name);
   };
 
   useEffect(() => {
-    getProfNames();
+    if (flag) {
+      setFlag(false);
+      getProfNames();
+    }
   }, []);
 
   // const profs = [
@@ -97,7 +98,7 @@ const AddProject = () => {
       project.prof === "" ||
       project.domain === ""
     ) {
-      alert("Please add all the required fields");
+      console.log("alert");
     } else {
       const formData = new FormData();
       formData.append("file", image);
@@ -142,7 +143,6 @@ const AddProject = () => {
 
   return (
     <div className="container my-5">
-      <Alert alert={alert} />
       <div className="row justify-content-center">
         <div className="col-lg-12">
           <div
@@ -162,7 +162,7 @@ const AddProject = () => {
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Project Title
+                  Project Title *
                 </label>
                 <input
                   type="text"
@@ -184,10 +184,10 @@ const AddProject = () => {
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
-                  Description
+                  Description *
                 </label>
                 <textarea
-                  rows="5"
+                  rows="15"
                   className="form-control"
                   placeholder="Describe your project in detail "
                   name="desc"
@@ -202,71 +202,75 @@ const AddProject = () => {
                 />
               </div>
               <br />
-              <div className="mb-3">
-                <label
-                  htmlFor="domain"
-                  className="form-label"
-                  style={{ fontWeight: "600" }}
-                >
-                  Choose a Domain
-                </label>
-                <select
-                  className="form-select"
-                  value={project.domain}
-                  onChange={(e) =>
-                    setProject({ ...project, domain: e.target.value })
-                  }
-                >
-                  {/* <option value="">Select Domain</option> */}
-                  {domainNames.map((domain, idx) => (
-                    <option key={idx} value={domain}>
-                      {domain}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <br />
-              <div className="mb-3">
-                <label
-                  htmlFor="professor"
-                  className="form-label"
-                  style={{ fontWeight: "600" }}
-                >
-                  Choose Professor
-                </label>
-                <select
-                  className="form-select"
-                  value={project.prof}
-                  onChange={(e) =>
-                    setProject({ ...project, prof: e.target.value })
-                  }
-                >
-                  {/* <option value="">Select Professor</option> */}
-                  {profNames.map((prof, idx) => (
-                    <option key={idx} value={prof}>
-                      {prof}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <br />
-              <div className="mb-3">
-                <label
-                  htmlFor="image"
-                  className="form-label"
-                  style={{ fontWeight: "600" }}
-                >
-                  Choose a cover photo for your project
-                </label>
-                <input
-                  type="file"
-                  className="form-control"
-                  id="image"
-                  // accept="image/*"
-                  // value = {project.imageUrl}
-                  accept=".png, .jpg, .jpeg"
-                  onChange={handleImage}
-                />
+              {/* -md-center */}
+              <div className="d-grid gap-2 d-md-flex justify-content-evenly">
+                <div className="mb-3" style={{ width: "250px" }}>
+                  <label
+                    htmlFor="domain"
+                    className="form-label"
+                    style={{ fontWeight: "600" }}
+                  >
+                    Choose a domain *
+                  </label>
+                  <select
+                    className="form-select"
+                    value={project.domain}
+                    onChange={(e) =>
+                      setProject({ ...project, domain: e.target.value })
+                    }
+                  >
+                    <option value="">No domain chosen</option>
+                    {domainNames.map((domain, idx) => (
+                      <option key={idx} value={domain}>
+                        {domain}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {/* <br /> */}
+                <div className="mb-3" style={{ width: "250px" }}>
+                  <label
+                    htmlFor="professor"
+                    className="form-label"
+                    style={{ fontWeight: "600" }}
+                  >
+                    Choose a professor *
+                  </label>
+                  <select
+                    className="form-select"
+                    value={project.prof}
+                    onChange={(e) =>
+                      setProject({ ...project, prof: e.target.value })
+                    }
+                  >
+                    <option value="">No professor chosen</option>
+                    {profNames.map((prof, idx) => (
+                      <option key={idx} value={prof}>
+                        {prof}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* <br /> */}
+                <div className="mb-3" style={{ width: "250px" }}>
+                  <label
+                    htmlFor="image"
+                    className="form-label"
+                    style={{ fontWeight: "600" }}
+                  >
+                    Choose a cover photo
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="image"
+                    // accept="image/*"
+                    // value = {project.imageUrl}
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handleImage}
+                  />
+                </div>
               </div>
               <br />
 

@@ -3,7 +3,9 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import img from "../images/aerospace.jpg";
 import ProjectImage from "./ProjectImage/ProjectImage";
-const port = 5001;
+const config = require("../config_frontend.js");
+
+const host = config.server.host;
 
 const ProjectCard = (props) => {
   const navigate = useNavigate();
@@ -11,7 +13,7 @@ const ProjectCard = (props) => {
   const [type, setType] = useState("");
   // let [flag, setFlag] = useState(true);
   const getType = async () => {
-    const url = `http://localhost:${port}/api/auth/getuser`;
+    const url = `${host}/api/auth/getuser`;
     const result = await axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem("token"),
@@ -23,8 +25,8 @@ const ProjectCard = (props) => {
     console.log(result.data.type);
   };
 
-  const handleApprove = async () => {
-    const url = `http://localhost:${port}/api/projects/approveProject/${project._id}`;
+  const handleApprove = async() => {
+    const url = `${host}/api/projects/approveProject/${project._id}`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {

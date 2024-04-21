@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./AccountSettings.css";
-const port = 5001;
+const config = require("../../config_frontend.js");
+
+const host = config.server.host;
 
 const ChangePassword = () => {
   const [passwordData, setPasswordData] = useState({
@@ -18,7 +20,7 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `http://localhost:${port}/api/auth/changePassword`;
+    const url = `${host}/api/auth/changePassword`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {
@@ -31,16 +33,7 @@ const ChangePassword = () => {
       }),
     });
     const json = await response.json();
-    if (!json.success) {
-      alert("Sorry! your current password is incorrect");
-    } else {
-      alert("Password changed successfully");
-      setPasswordData({
-        currentPassword: "",
-        newPassword: "",
-      });
-    }
-    console.log(json.response);
+    console.log(json);
 
     console.log("Password data submitted:", passwordData);
   };

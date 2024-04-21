@@ -8,6 +8,10 @@ const authRoutes = require("./routes/Auth");
 const projectRoutes = require("./routes/Projects");
 const profRoutes = require("./routes/Prof");
 const bodyParser = require('body-parser');
+const config = require("./config_backend.js");
+
+const host = config.server.host;
+const port = config.server.port;
 
 // database connection
 connection();
@@ -25,5 +29,5 @@ app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/prof", profRoutes);
 
-const port = process.env.PORT || 5001;
-app.listen(port, console.log(`Listening on port ${port}...`));
+// const port = process.env.PORT || 5001;
+app.listen(port, console.log(`Listening on host ${host}... and port ${port}...`));

@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Logo from "../images/navbaricon.png";
-import Alert from "./Alert";
+const config = require("../config_frontend.js");
 
-const port = 5001;
+const host = config.server.host;
 const Navbar = (props) => {
   let location = useLocation();
   let navigate = useNavigate();
   const [name, setName] = useState(null);
   let [flag, setFlag] = useState(true);
   const getName = async () => {
-    const url = `http://localhost:${port}/api/auth/getuser`;
+    const url = `${host}/api/auth/getuser`;
     const result = await axios.get(url, {
       headers: {
         "auth-token": localStorage.getItem("token"),
@@ -75,16 +75,16 @@ const Navbar = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul
-            className="navbar-nav mx-auto mb-2 mb-lg-0 text-center"
-            style={{
-              position: "fixed",
-              left: "50%",
-              transform: "translateX(-50%)",
-              margin: 0,
-              padding: 0,
-            }}
+            className="navbar-nav me-auto mb-2 mb-lg-0 text-center"
+            // style={{
+            //   position: "fixed",
+            //   left: "50%",
+            //   transform: "translateX(-50%)",
+            //   margin: 0,
+            //   padding: 0,
+            // }}
           >
-            <li className="nav-item mx-2">
+            {/* <li className="nav-item mx-2">
               <Link
                 className={`nav-link ${
                   location.pathname === "/" ? "active" : ""
@@ -95,7 +95,7 @@ const Navbar = (props) => {
               >
                 Home
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item mx-2">
               <Link
                 className={`nav-link ${
@@ -104,7 +104,7 @@ const Navbar = (props) => {
                 to="/allProjects"
                 style={{ textDecoration: "none", color: "white" }}
               >
-                Projects
+                All Projects
               </Link>
             </li>
             <li className="nav-item mx-2">
@@ -130,7 +130,11 @@ const Navbar = (props) => {
               </Link>
             </li> */}
           </ul>
-          <form className="d-flex justify-content-end">
+          <form
+            className="d-flex justify-content-end"
+            // style={{position: "absolute",
+            // left: "94%",}}
+          >
             <div
               className="collapse navbar-collapse"
               id="navbarNavDarkDropdown"

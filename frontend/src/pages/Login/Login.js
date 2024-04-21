@@ -6,8 +6,10 @@ import { useGoogleLogin } from "@react-oauth/google";
 import "./Login.css";
 
 import GoogleLogo from "../../images/google.png";
-const port = 5001;
-const Login = (props) => {
+const config = require("../../config_frontend.js");
+
+const host = config.server.host;
+const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -47,11 +49,11 @@ const Login = (props) => {
           // Save the auth token and redirect
           console.log(json.authToken);
           localStorage.setItem("token", json.authToken);
-          // props.showAlert("Logged in successfully", 'success');
+          props.showAlert("Logged in successfully", "success");
           // alert("Logged In Successfully")
           navigate("/");
         } else {
-          // props.showAlert("Invalid credentials", 'danger')
+          props.showAlert("Invalid credentials", "danger");
           // alert("Invalid credentials")
         }
       } catch (err) {
@@ -63,7 +65,7 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = data;
-    const url = `http://localhost:${port}/api/auth/login`;
+    const url = `${host}/api/auth/login`;
 
     const response = await fetch(url, {
       method: "POST",
@@ -78,11 +80,11 @@ const Login = (props) => {
       // Save the auth token and redirect
       console.log(json.authToken);
       localStorage.setItem("token", json.authToken);
-      //  props.showAlert("Logged in successfully",'success')
+      props.showAlert("Logged in successfully", "success");
       // alert("Logged in successfully");
       navigate("/");
     } else {
-      //props.showAlert("Invalid credentials", "danger");
+      props.showAlert("Invalid credentials", "danger");
       // alert("Invalid credentials");
     }
     // try {

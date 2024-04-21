@@ -46,7 +46,10 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetchuser = require("../middleware/fetchuser");
 
-const JWT_SECRET = "ItsSaturdayToday";
+const config = require("../config_backend.js");
+// const host = config.server.host;
+// const port = config.server.port;
+const JWT_SECRET = config.jwt.secret;
 
 // Route 1: create a user using :POST "api/auth/createuser". No Loginn required
 router.post(
@@ -78,15 +81,15 @@ router.post(
         });
       }
       const salt = await bcrypt.genSalt(10);
-      const secPass = await bcrypt.hash(req.body.password, salt);
+      const secPass = await bcrypt.hash(password, salt);
       console.log("2");
-      console.log(req.body.name);
+      console.log(name);
       user = await User.create({
         name: req.body.name,
         type: "prof",
-        rollNumber: req.body.rollNumber,
-        phone: req.body.phone,
-        email: req.body.email,
+        rollNumber,
+        phone,
+        email,
         password: secPass,
       });
       console.log("3");

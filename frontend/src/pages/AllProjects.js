@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProjectCard from "../components/ProjectCard";
-const port = 5001;
+const config = require("../config_frontend.js");
+
+const host = config.server.host;
 
 const AllProjectsPage = () => {
   const [flag, setFlag] = useState(true);
@@ -20,7 +22,7 @@ const AllProjectsPage = () => {
   ];
 
   const getProfNames = async () => {
-    const url = `http://localhost:${port}/api/prof/getprofs`;
+    const url = `${host}/api/prof/getprofs`;
     const result = await axios.get(url);
     const updatedNames = [...profNames, ...result.data];
     setProfNames(updatedNames);
@@ -40,7 +42,7 @@ const AllProjectsPage = () => {
   }, []);
 
   const getPdf = async () => {
-    const url = "http://localhost:5001/api/projects/get-all-projects";
+    const url = `${host}/api/projects/get-all-projects`;
     const result = await axios.get(url);
     setAllProjects(result.data.data);
   };
@@ -101,6 +103,7 @@ const AllProjectsPage = () => {
       >
         All Projects
       </h2>
+      <div className="d-grid gap-2 d-md-flex justify-content-between">
       <div className="row mb-3 justify-content-between align-items-center">
         <div className="col-md-8">
           <div className="input-group">
@@ -199,6 +202,7 @@ const AllProjectsPage = () => {
             </ul>
           </div>
         </div>
+      </div>
       </div>
       <div className="row">
         {filteredProjects.length === 0
