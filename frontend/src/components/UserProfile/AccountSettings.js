@@ -64,6 +64,7 @@ const AccountSettings = (props) => {
     });
     const json = await response.json();
     console.log(json.response);
+    props.showAlert("Changes saved successfully", "success");
     console.log("Form submitted:", formData);
   };
 

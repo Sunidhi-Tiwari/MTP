@@ -7,7 +7,7 @@ const config = require("../../config_frontend.js");
 const host = config.server.host;
 
 const CurrentProjects = (props) => {
-  const [projectIds, setProjectIds] = useState([]);
+  const [currentProjects, setCurrentProjects] = useState([]);
   let [flag, setFlag] = useState(true);
   const getProjects = async () => {
     const url = `${host}/api/users/approvedProjects`;
@@ -16,7 +16,7 @@ const CurrentProjects = (props) => {
         "auth-token": localStorage.getItem("token"),
       },
     });
-    setProjectIds(result.data);
+    setCurrentProjects(result.data);
     console.log(result.data);
   };
 
@@ -41,8 +41,9 @@ const CurrentProjects = (props) => {
     );
     const json = await response.json();
     console.log(json);
-    // const newNotes = notes.filter((note) => { return note._id !== id })
-    // setNotes(newNotes)
+    const newProjects = currentProjects.filter((project) => { return project._id !== id })
+    setCurrentProjects(newProjects)
+    props.showAlert("Project deleted successfully", "success");
   };
 
   // const context = useContext(projectContext);
@@ -68,14 +69,27 @@ const CurrentProjects = (props) => {
     const json = await response.json(); 
     console.log(json);
       refClose.current.click();
-      // props.showAlert("Updated successfully",'success')
+      props.showAlert("Project updated successfully",'success');
+
+    let newProjects = JSON.parse(JSON.stringify(currentProjects))
+    // Logic to edit in client
+    for (let index = 0; index < newProjects.length; index++) {
+      const element = newProjects[index];
+      if (element._id === project.id) {
+        newProjects[index].title = project.title;
+        newProjects[index].desc = project.desc;
+        break; 
+      }
+    }  
+    setCurrentProjects(newProjects);
+
   }
 
   const onChange = (e)=>{
       setProject({...project, [e.target.name]: e.target.value})
   }
 
-  if(projectIds.length === 0) {
+  if(currentProjects.length === 0) {
     return <div className="container">Sorry!! You don't have any approved projects</div>;
   }
   else{
@@ -116,8 +130,8 @@ const CurrentProjects = (props) => {
           </div>
       </div>
       <div className="container row">
-        {projectIds &&
-          projectIds.map((project, idx) => {
+        {currentProjects &&
+          currentProjects.map((project, idx) => {
             return (
               <ProjectCard
                 project = {project}
@@ -137,61 +151,3 @@ const CurrentProjects = (props) => {
 };
 
 export default CurrentProjects;
-
-
-
-
-// import React, {useState, useEffect} from "react";
-// import axios from "axios"
-// import ProjectCard from "../ProjectCard";
-
-// const port = 5001;
-
-// const CurrentProjects = () => {
-//     const [projectIds, setProjectIds] = useState([]);
-//     let [flag, setFlag] = useState(true);
-//     const getProjects = async()=>{
-//       const url = `http://localhost:${port}/api/users/approvedProjects`;
-//       const result = await axios.get(url, {
-//         headers:{
-//             'auth-token': localStorage.getItem('token')
-//         }
-//       });
-//       setProjectIds(result.data);
-//       console.log(result.data);
-//     }
-    
-//     useEffect(()=>{
-//       if(flag){
-//         setFlag(false);
-//         console.log("On Current Projects Page")
-//         getProjects();
-//       }
-//     },[])
-
-//     if(projectIds.length === 0) {
-//         return <div className="container">Sorry! You don't have any approved projects</div>;
-//     }
-//     else{
-//         return (
-//             <div>
-//                 <div className="container row">
-//                     {projectIds &&
-//                     projectIds.map((project, idx) => {
-//                         return (
-//                         <ProjectCard
-//                             project = {project}
-//                             updateProject={updateProject}
-//                             flag = {true}
-//                             md = {6}
-//                             key={idx}
-//                           />
-//                         );
-//                     })}
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-
-// export default CurrentProjects

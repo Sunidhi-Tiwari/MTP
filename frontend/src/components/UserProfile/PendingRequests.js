@@ -43,6 +43,7 @@ const PendingRequests = (props) => {
     console.log(json);
     const newProjects = pendingProjects.filter((project) => { return project._id !== id })
     setPendingProjects(newProjects)
+    props.showAlert("Project deleted successfully", "success");
   };
 
   // const context = useContext(projectContext);
@@ -68,6 +69,7 @@ const PendingRequests = (props) => {
     const json = await response.json(); 
     console.log(json);
     refClose.current.click();
+    props.showAlert("Project updated successfully", "success");
 
     let newProjects = JSON.parse(JSON.stringify(pendingProjects))
     // Logic to edit in client

@@ -7,7 +7,7 @@ const config = require("../../config_frontend.js");
 
 const host = config.server.host;
 
-const Signup = () => {
+const Signup = (props) => {
   const [data, setData] = useState({
     name: "",
     rollNumber: "",
@@ -30,7 +30,7 @@ const Signup = () => {
     //     props.showAlert("Passwords donot match",'danger');
     // }
     // else{
-    const url = `http://localhost:${port}/api/auth/createuser`;
+    const url = `${host}/api/auth/createuser`;
     // const url = `${host}/api/auth/createuser`;
     const { name, rollNumber, phone, email, password } = data;
 
@@ -44,11 +44,11 @@ const Signup = () => {
     const output = await response.json();
     if (output.success) {
       localStorage.setItem("token", output.authToken);
-      alert("Account created successfully");
+      props.showAlert("Account created successfully", "success");
       navigate("/");
     } else {
       // props.showAlert("Invalid credentials",'danger')
-      alert("Invalid credentials");
+      props.showAlert("User with this email address alredy exists", "danger");
     }
     console.log(output);
     // }

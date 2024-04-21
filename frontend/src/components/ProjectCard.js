@@ -51,7 +51,7 @@ const ProjectCard = (props) => {
   console.log(project.image);
   return (
     <div className={`col-md-${md}`}>
-      <div className="card my-3 mx-2">
+      <div className="card my-3 mx-2" style={{borderColor: "#1A374D"}}>
         {!project.image ? (
           <ProjectImage
             projectimage={img}
@@ -60,18 +60,18 @@ const ProjectCard = (props) => {
           />
         ) : (
           <ProjectImage
-            projectimage={`http://localhost:5001/files/${project.image}`}
+            projectimage={`${host}/files/${project.image}`}
             className="card-img-top"
             alt="project"
           />
         )}
 
         <div className="card-body">
-          <div className="d-flex align-items-center">
-            <h5 className="card-title">{project.title}</h5>
+          <div className="d-flex bd-highlight">
+            <h5 className="p flex-grow-1 bd-highlight card-title">{project.title}</h5>
             {page !== "all" ? (
               <i
-                className="far fa-trash-alt mx-3"
+                className="p-2 bd-highlight far fa-trash-alt"
                 onClick={() => {
                   deleteProject(project._id);
                 }}
@@ -80,9 +80,9 @@ const ProjectCard = (props) => {
               <></>
             )}
 
-            {page !== "all" && type === "user" ? (
+            {page !== "all" && type === "student" ? (
               <i
-                className="far fa-edit"
+                className="p-2 bd-highlight far fa-edit"
                 onClick={() => {
                   updateProject(project);
                 }}
