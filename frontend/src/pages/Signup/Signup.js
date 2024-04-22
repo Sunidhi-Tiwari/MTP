@@ -34,6 +34,11 @@ const Signup = (props) => {
     // const url = `${host}/api/auth/createuser`;
     const { name, rollNumber, phone, email, password } = data;
 
+    if (password.length < 8) {
+      props.showAlert("Password must be at least 8 characters long", "danger");
+      return;
+    }
+
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -42,6 +47,7 @@ const Signup = (props) => {
       body: JSON.stringify({ name, rollNumber, phone, email, password }),
     });
     const output = await response.json();
+
     if (output.success) {
       localStorage.setItem("token", output.authToken);
       props.showAlert("Account created successfully", "success");
@@ -51,6 +57,7 @@ const Signup = (props) => {
       props.showAlert("User with this email address alredy exists", "danger");
     }
     console.log(output);
+
     // }
 
     // try {
