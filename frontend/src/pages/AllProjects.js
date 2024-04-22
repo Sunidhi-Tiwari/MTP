@@ -22,6 +22,7 @@ const AllProjectsPage = () => {
 
   const getProfNames = async () => {
     const url = `${host}/api/prof/getprofs`;
+    console.log(url);
     const result = await axios.get(url);
     // const updatedNames = [...profNames, ...result.data];
     setProfNames(result.data);
@@ -148,8 +149,8 @@ const AllProjectsPage = () => {
         {/* </div> */}
         {/* <div className="col-md-2"> */}
 
-        <div className="mb-3" style={{ width: "250px"}}>
-                {/* <label
+        <div className="mb-3" style={{ width: "250px" }}>
+          {/* <label
                   htmlFor="domain"
                   className="form-label"
                   style={{ fontWeight: "600" }}
@@ -199,8 +200,8 @@ const AllProjectsPage = () => {
         {/* </div> */}
         {/* <div className="col-md-2"> */}
 
-        <div className="mb-3" style={{ width: "250px"}}>
-                {/* <label
+        <div className="mb-3" style={{ width: "250px" }}>
+          {/* <label
                   htmlFor="professor"
                   className="form-label"
                   style={{ fontWeight: "600" }}
