@@ -6,7 +6,7 @@ const config = require("../config_frontend.js");
 
 const host = config.server.host;
 
-const AddProject = () => {
+const AddProject = (props) => {
   const navigate = useNavigate();
   const [flag, setFlag] = useState(true);
   const [image, setImage] = useState("");
@@ -87,26 +87,10 @@ const AddProject = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      project.title.trim() === "" ||
-      project.desc.trim() === "" ||
-      project.prof === "" ||
-      project.domain === ""
-    ) {
-      alert("Please add all the required fields");
-    } else {
-      console.log("prof -> ", project.prof);
-      console.log("domain -> ", project.domain);
-      console.log("URLs -> ", project.urls);
-      // console.log("Image -> ", project.imageUrl);
-      if (
-        project.title.trim() === "" ||
-        project.desc.trim() === "" ||
-        project.prof === "" ||
-        project.domain === ""
-      ) {
-        console.log("alert");
-      } else {
+    if (project.title.trim() === "" || project.desc.trim() === "" || project.prof === "" || project.domain === ""){
+        props.showAlert("Please add all the required fields", "danger");
+    } 
+    else {
         const formData = new FormData();
         formData.append("file", image);
         formData.append("title", project.title);
@@ -145,8 +129,9 @@ const AddProject = () => {
           urls: [{ url: "", urlDesc: "" }],
         });
         setImage("");
-      }
+      
     }
+  }
 
     return (
       <div className="container my-5">
@@ -352,6 +337,6 @@ const AddProject = () => {
       </div>
     );
   };
-};
+
 
 export default AddProject;

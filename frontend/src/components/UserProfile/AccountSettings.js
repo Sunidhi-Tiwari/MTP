@@ -5,7 +5,7 @@ const config = require("../../config_frontend.js");
 
 const host = config.server.host;
 
-const AccountSettings = () => {
+const AccountSettings = (props) => {
   let [flag, setFlag] = useState(true);
   const [formData, setFormData] = useState({
     name: "",

@@ -6,7 +6,7 @@ const config = require("../../config_frontend.js");
 
 const host = config.server.host;
 
-const PendingRequests = () => {
+const PendingRequests = (props) => {
   const [pendingProjects, setPendingProjects] = useState([]);
   let [flag, setFlag] = useState(true);
   const getProjects = async () => {
