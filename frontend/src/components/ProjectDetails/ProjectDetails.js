@@ -48,13 +48,17 @@ const ProjectDetails = () => {
     return <p>No project data available.</p>;
   }
 
-  const { title, desc, prof, domain, student, image, urls } = projectData;
+  const { title, desc, prof, domain, student, image, urls, date } = projectData;
+  console.log(date);
+
+  var date1 = new Date(date);
+  var formattedDate = date1.toLocaleDateString();
 
   const handleClick = () => {
     if (image) {
-      window.open(`http://localhost:5001/files/${image}`, "_blank");
+      window.open(`${host}/files/${image}`, "_blank");
     } else {
-      window.open("http://localhost:5001/files/aerospace.jpg", "_blank");
+      window.open(`${host}/files/aerospace.jpg`, "_blank");
     }
   };
 
@@ -70,7 +74,7 @@ const ProjectDetails = () => {
             />
           ) : (
             <ProjectImage
-              projectimage={`http://localhost:5001/files/${image}`}
+              projectimage={`${host}/files/${image}`}
               className="card-img-top"
               alt="project"
             />
@@ -111,6 +115,9 @@ const ProjectDetails = () => {
             </p>
             <p style={{ color: "#1A374D" }}>
               <b style={{ color: "#406882" }}>Author:</b> {student}
+            </p>
+            <p style={{ color: "#1A374D" }}>
+              <b style={{ color: "#406882" }}>Added on:</b> {formattedDate}
             </p>
           </div>
           {urls && urls.length > 0 && (

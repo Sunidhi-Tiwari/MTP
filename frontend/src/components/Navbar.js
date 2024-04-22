@@ -11,25 +11,26 @@ const Navbar = (props) => {
   const [name, setName] = useState(null);
   let [flag, setFlag] = useState(true);
   const getName = async () => {
-    const url = `${host}/api/auth/getuser`;
-    const result = await axios.get(url, {
-      headers: {
-        "auth-token": localStorage.getItem("token"),
-      },
-    });
-    setName(result.data.name);
-    console.log(result.data);
-    console.log(result.data.name);
+    if (!localStorage.getItem("token")) {
+      setName("Profile");
+    }
+    else{
+      const url = `${host}/api/auth/getuser`;
+      const result = await axios.get(url, {
+        headers: {
+          "auth-token": localStorage.getItem("token"),
+        },
+      });
+      setName(result.data.name);
+      console.log(result.data);
+      console.log(result.data.name);
+    }
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      setName("Profile");
-    } else if (flag) {
-      setFlag(false);
-      console.log("On Navbar");
+    
       getName();
-    }
+
   }, [localStorage.getItem("token")]);
 
   const handleLogout = (e) => {

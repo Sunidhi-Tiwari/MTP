@@ -111,7 +111,7 @@ const AddProject = (props) => {
             },
           })
           .then((res) => {
-            alert("Uploaded Successfully");
+            props.showAlert("Uploaded Successfully", "success");
           })
           .catch((er) => console.log("error", er));
 

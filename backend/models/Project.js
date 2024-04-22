@@ -11,6 +11,7 @@ const projectSchema = new Schema({
   urls: { type: Object, default:{} },
   image: { type: String, default:"" },
   status: { type: String, default: "pending" },
+  date:{type: Date, default: Date.now}
 });
 
 module.exports = mongoose.model('projects', projectSchema);

@@ -32,11 +32,14 @@ router.post(
       console.log(req.file);  
       console.log("Hii");
       // const title = req.body.title;
-      const fileName = req.file.filename;
+      let fileName = "";
+      if (req.file)
+        fileName = req.file.filename;
       console.log(fileName)
       try {
         console.log("User -> ", req.user.id)
         const user = await User.findById(req.user.id)
+
         const { title, desc, prof, domain, urls } = req.body;
         // console.log("Image -> ", image);
         const errors = validationResult(req)
@@ -90,7 +93,7 @@ router.post(
   router.get('/get-all-projects', (req, res) => {
     // res.send('All Files');
     try {
-      Project.find({}).then((data) => {
+      Project.find({status: "approved"}).then((data) => {
         res.send({ status: "Ok", data: data })
       })
     } catch (error) {
@@ -112,11 +115,12 @@ router.post(
   router.delete('/deleteproject/:id', fetchuser, async (req, res) => {
     try {
       let project = await Project.findById(req.params.id);
+      let user = await User.findById(req.user.id);
       if (!project) {
         return res.status(404).send("Not found");
       }
       // Allow deletion only if user owns this project
-      if (project.user.toString() !== req.user.id) {
+      if ((project.user.toString() !== req.user.id) && (project.prof !== user.name)) {
         return res.status(401).send("Not Allowed");
       }
   
