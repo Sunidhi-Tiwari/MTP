@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   // approved: { type: Object, default: {} },
 });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model("user", UserSchema);
 module.exports = User;
 
 // userSchema.methods.generateAuthToken = function () {

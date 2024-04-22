@@ -25,7 +25,7 @@ const ProjectCard = (props) => {
     console.log(result.data.type);
   };
 
-  const handleApprove = async() => {
+  const handleApprove = async () => {
     const url = `${host}/api/projects/approveProject/${project._id}`;
     const response = await fetch(url, {
       method: "PUT",
@@ -51,8 +51,8 @@ const ProjectCard = (props) => {
   console.log(project.image);
   return (
     <div className={`col-md-${md}`}>
-      <div className="card my-3 mx-2" style={{borderColor: "#1A374D"}}>
-        {!project.image ? (
+      <div className="card my-3 mx-2" style={{ borderColor: "#1A374D" }}>
+        {!project.image || !`${host}/files/${project.image}` ? (
           <ProjectImage
             projectimage={img}
             className="card-img-top"
@@ -68,7 +68,9 @@ const ProjectCard = (props) => {
 
         <div className="card-body">
           <div className="d-flex bd-highlight">
-            <h5 className="p flex-grow-1 bd-highlight card-title">{project.title}</h5>
+            <h5 className="p flex-grow-1 bd-highlight card-title">
+              {project.title}
+            </h5>
             {page !== "all" ? (
               <i
                 className="p-2 bd-highlight far fa-trash-alt"

@@ -44,8 +44,7 @@ const Navbar = (props) => {
     if (!localStorage.getItem("token")) {
       props.showAlert("Please login first to add project", "danger");
       navigate("/login");
-    } 
-    else {
+    } else {
       navigate("/addProject");
     }
   };
