@@ -28,7 +28,8 @@ const ProjectDetails = () => {
 
   useEffect(() => {
     const url = `${host}/api/projects/getproject/${id}`;
-    axios.get(url)
+    axios
+      .get(url)
       .then((res) => {
         setProjectData(res.data.data);
         setLoading(false);
@@ -66,7 +67,7 @@ const ProjectDetails = () => {
     <div className="research-project">
       <div className="top-section" style={{ position: "relative" }}>
         <div style={{ position: "relative" }}>
-          {!image ? (
+          {!image || !`${host}/files/${image}` ? (
             <ProjectImage
               projectimage={img}
               className="card-img-top"

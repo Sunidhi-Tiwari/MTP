@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  type: { type: String, default: "prof" },
+  type: { type: String, default: "student" },
   rollNumber: { type: String },
   phone: { type: String, required: true },
   email: { type: String, required: true },
@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
   // approved: { type: Object, default: {} },
 });
 
-const User = mongoose.model('user', UserSchema);
+const User = mongoose.model("user", UserSchema);
 module.exports = User;
 
 // userSchema.methods.generateAuthToken = function () {

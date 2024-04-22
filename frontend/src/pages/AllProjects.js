@@ -88,8 +88,7 @@ const AllProjectsPage = () => {
         project.domain.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.prof.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (selectedDomain === "" || project.domain === selectedDomain) &&
-      (selectedProfessor === "" ||
-        project.prof === selectedProfessor)
+      (selectedProfessor === "" || project.prof === selectedProfessor)
     );
   });
 
@@ -103,78 +102,76 @@ const AllProjectsPage = () => {
         All Projects
       </h2>
       <div className="d-grid gap-5 d-md-flex justify-content-evenly align-items-center">
-      {/* <div className="row mb-3 justify-content-between align-items-center"> */}
+        {/* <div className="row mb-3 justify-content-between align-items-center"> */}
         {/* <div className="col-md-8"> */}
-          <div className="mb-3 input-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search for project"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              style={{borderColor: "#1A374D", paddingRight: "10rem" }} // Adjust paddingRight to accommodate the icon
-            />
-            <div className="input-group-append">
-              <span
-                className="input-group-text"
+        <div className="mb-3 input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search for project"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            style={{ borderColor: "#1A374D", paddingRight: "10rem" }} // Adjust paddingRight to accommodate the icon
+          />
+          <div className="input-group-append">
+            <span
+              className="input-group-text"
+              style={{
+                cursor: "pointer",
+                borderColor: "#1A374D",
+                backgroundColor: "#fff",
+              }} // Set background color to match input field
+              onClick={handleSearchSubmit}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
                 style={{
-                  cursor: "pointer",
+                  width: "1.5rem",
+                  height: "1.5rem",
+                  stroke: "#6c757d",
                   borderColor: "#1A374D",
-                  backgroundColor: "#fff",
-                }} // Set background color to match input field
-                onClick={handleSearchSubmit}
+                }}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  style={{
-                    width: "1.5rem",
-                    height: "1.5rem",
-                    stroke: "#6c757d",
-                    borderColor: "#1A374D",
-                  }}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                  />
-                </svg>
-              </span>
-            </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
+            </span>
           </div>
+        </div>
         {/* </div> */}
         {/* <div className="col-md-2"> */}
 
-        <div className="mb-3" style={{ width: "400px"}}>
-                {/* <label
+        <div className="mb-3" style={{ width: "400px" }}>
+          {/* <label
                   htmlFor="domain"
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
                   Choose a domain *
                 </label> */}
-                <select
-                  className="form-select"
-                  value={selectedDomain}
-                  onChange={(e) =>
-                    setSelectedDomain(e.target.value )
-                  }
-                  style={{borderColor: "#1A374D", fontWeight: "600"}}
-                >
-                  <option value="">All Domains</option>
-                  {domainNames.map((domain, idx) => (
-                    <option key={idx} value={domain}>
-                      {domain}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <select
+            className="form-select"
+            value={selectedDomain}
+            onChange={(e) => setSelectedDomain(e.target.value)}
+            style={{ borderColor: "#1A374D", fontWeight: "600" }}
+          >
+            <option value="">All Domains</option>
+            {domainNames.map((domain, idx) => (
+              <option key={idx} value={domain}>
+                {domain}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          {/* <div className="mb-3 dropdown">
+        {/* <div className="mb-3 dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
               type="button"
@@ -202,33 +199,30 @@ const AllProjectsPage = () => {
         {/* </div> */}
         {/* <div className="col-md-2"> */}
 
-        <div className="mb-3" style={{ width: "400px"}}>
-                {/* <label
+        <div className="mb-3" style={{ width: "400px" }}>
+          {/* <label
                   htmlFor="professor"
                   className="form-label"
                   style={{ fontWeight: "600" }}
                 >
                   Choose a professor *
                 </label> */}
-                <select
-                  className="form-select"
-                  style={{borderColor: "#1A374D", fontWeight: "600"}}
-                  value={selectedProfessor}
-                  onChange={(e) =>
-                    setSelectedProfessor(e.target.value)
-                  }
-                >
-                  <option value="">All professors</option>
-                  {profNames.map((prof, idx) => (
-                    <option key={idx} value={prof}>
-                      {prof}
-                    </option>
-                  ))}
-                </select>
-              </div>
+          <select
+            className="form-select"
+            style={{ borderColor: "#1A374D", fontWeight: "600" }}
+            value={selectedProfessor}
+            onChange={(e) => setSelectedProfessor(e.target.value)}
+          >
+            <option value="">All professors</option>
+            {profNames.map((prof, idx) => (
+              <option key={idx} value={prof}>
+                {prof}
+              </option>
+            ))}
+          </select>
+        </div>
 
-
-          {/* <div className="mb-3 dropdown">
+        {/* <div className="mb-3 dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
               type="button"
@@ -254,13 +248,19 @@ const AllProjectsPage = () => {
             </ul>
           </div> */}
         {/* </div> */}
-      {/* </div> */}
+        {/* </div> */}
       </div>
       <div className="row">
         {filteredProjects.length === 0
           ? noProjectsMessage
           : filteredProjects.map((project, idx) => (
-              <ProjectCard project={project} page = "all" flag={false} md={4} key={idx} />
+              <ProjectCard
+                project={project}
+                page="all"
+                flag={false}
+                md={4}
+                key={idx}
+              />
             ))}
       </div>
     </div>
