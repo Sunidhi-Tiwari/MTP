@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const config = require("./config_backend.js");
 
 const host = config.server.host;
-const port = config.server.port;
+const port = process.env.PORT || config.server.port;
 
 // database connection
 connection();

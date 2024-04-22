@@ -79,7 +79,7 @@ const Navbar = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul
-            className="navbar-nav me-auto mb-2 mb-lg-0 text-center"
+            className="navbar-nav me-auto mb-2 mb-lg-0 text-center align-items-center"
             // style={{
             //   position: "fixed",
             //   left: "50%",
@@ -87,6 +87,7 @@ const Navbar = (props) => {
             //   margin: 0,
             //   padding: 0,
             // }}
+            style={{position: "relative", left: "34%"}}
           >
             {/* <li className="nav-item mx-2">
               <Link
@@ -100,7 +101,7 @@ const Navbar = (props) => {
                 Home
               </Link>
             </li> */}
-            <li className="nav-item mx-2">
+            <li className="nav-item align-items-center">
               <Link
                 className={`nav-link ${
                   location.pathname === "/allProjects" ? "active" : ""
@@ -111,7 +112,7 @@ const Navbar = (props) => {
                 All Projects
               </Link>
             </li>
-            <li className="nav-item mx-2">
+            <li className="nav-item align-items-center">
               <button
                 className={`nav-link ${
                   location.pathname === "/addProject" ? "active" : ""
@@ -134,13 +135,9 @@ const Navbar = (props) => {
               </Link>
             </li> */}
           </ul>
-          <form
-            className="d-flex justify-content-end"
-            // style={{position: "absolute",
-            // left: "94%",}}
-          >
+          
             <div
-              className="collapse navbar-collapse"
+              className="d-flex justify-content-end collapse navbar-collapse align-items-center"
               id="navbarNavDarkDropdown"
             >
               <ul className="navbar-nav">
@@ -232,7 +229,8 @@ const Navbar = (props) => {
                 </li>
               </ul>
             </div>
-          </form>
+          
+          {/* form */}
         </div>
       </div>
     </nav>

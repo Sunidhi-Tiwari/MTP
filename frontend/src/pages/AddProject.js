@@ -196,7 +196,7 @@ const AddProject = (props) => {
                 <br />
                 {/* -md-center */}
                 <div className="d-grid gap-2 d-md-flex justify-content-evenly">
-                  <div className="mb-3" style={{ width: "250px" }}>
+                  <div className="mb-3">
                     <label
                       htmlFor="domain"
                       className="form-label"
@@ -220,7 +220,7 @@ const AddProject = (props) => {
                     </select>
                   </div>
                   {/* <br /> */}
-                  <div className="mb-3" style={{ width: "250px" }}>
+                  <div className="mb-3">
                     <label
                       htmlFor="professor"
                       className="form-label"
@@ -245,7 +245,7 @@ const AddProject = (props) => {
                   </div>
 
                   {/* <br /> */}
-                  <div className="mb-3" style={{ width: "250px" }}>
+                  <div className="mb-3">
                     <label
                       htmlFor="image"
                       className="form-label"
