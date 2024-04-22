@@ -199,13 +199,8 @@ const AllProjectsPage = () => {
         {/* </div> */}
         {/* <div className="col-md-2"> */}
 
-<<<<<<< HEAD
         <div className="mb-3" style={{ width: "250px"}}>
                 {/* <label
-=======
-        <div className="mb-3" style={{ width: "400px" }}>
-          {/* <label
->>>>>>> 3ddf842b20e974e9a714ccbdcbb5eda5536cfa6d
                   htmlFor="professor"
                   className="form-label"
                   style={{ fontWeight: "600" }}
